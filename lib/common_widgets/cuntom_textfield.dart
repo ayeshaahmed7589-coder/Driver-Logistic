@@ -44,6 +44,7 @@ class _CustomAnimatedTextFieldState extends State<CustomAnimatedTextField> {
   void initState() {
     super.initState();
     widget.focusNode.addListener(_handleFocusChange);
+    widget.controller.addListener(_handleTextChange);
   }
 
   void _handleFocusChange() {
