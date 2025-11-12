@@ -44,18 +44,17 @@ class _CustomAnimatedTextFieldState extends State<CustomAnimatedTextField> {
   void initState() {
     super.initState();
     widget.focusNode.addListener(_handleFocusChange);
-    widget.controller.addListener(_handleTextChange);
-  }
-
-  void _handleTextChange() {
-    setState(() {
-      _hasText = widget.controller.text.isNotEmpty;
-    });
   }
 
   void _handleFocusChange() {
     setState(() {
       _isFocused = widget.focusNode.hasFocus;
+    });
+  }
+
+  void _handleTextChange() {
+    setState(() {
+      _hasText = widget.controller.text.isNotEmpty;
     });
   }
 
