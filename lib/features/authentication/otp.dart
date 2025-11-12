@@ -1,10 +1,7 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:logisticdriverapp/common_widgets/custom_button.dart';
-import 'package:logisticdriverapp/common_widgets/custom_text.dart';
-import 'package:logisticdriverapp/constants/gap.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
+
+import '../../export.dart';
+
 
 class VerificationScreen extends StatefulWidget {
   const VerificationScreen({Key? key}) : super(key: key);
