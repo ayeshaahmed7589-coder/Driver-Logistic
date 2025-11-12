@@ -13,6 +13,7 @@ class CustomAnimatedTextField extends StatefulWidget {
   final String? Function(String?)? validator;
   final TextInputType keyboardType;
   final bool obscureText;
+  final Widget? suffixIcon;
 
   const CustomAnimatedTextField({
     Key? key,
@@ -27,6 +28,7 @@ class CustomAnimatedTextField extends StatefulWidget {
     this.validator,
     this.keyboardType = TextInputType.text,
     this.obscureText = false,
+    this.suffixIcon,
   }) : super(key: key);
 
   @override
@@ -36,11 +38,19 @@ class CustomAnimatedTextField extends StatefulWidget {
 
 class _CustomAnimatedTextFieldState extends State<CustomAnimatedTextField> {
   bool _isFocused = false;
+  bool _hasText = false;
 
   @override
   void initState() {
     super.initState();
     widget.focusNode.addListener(_handleFocusChange);
+    widget.controller.addListener(_handleTextChange);
+  }
+
+  void _handleTextChange() {
+    setState(() {
+      _hasText = widget.controller.text.isNotEmpty;
+    });
   }
 
   void _handleFocusChange() {
@@ -52,11 +62,13 @@ class _CustomAnimatedTextFieldState extends State<CustomAnimatedTextField> {
   @override
   void dispose() {
     widget.focusNode.removeListener(_handleFocusChange);
+    widget.controller.removeListener(_handleTextChange);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final bool shouldFloat = _isFocused || _hasText;
     return SizedBox(
       height: 80,
       child: Stack(
@@ -99,11 +111,14 @@ class _CustomAnimatedTextFieldState extends State<CustomAnimatedTextField> {
                         widget.prefixIcon,
                         color: widget.iconColor,
                       ),
+                      suffixIcon: widget.suffixIcon,
+
                       hintText: widget.hintText,
                       hintStyle: TextStyle(
                         color: widget.textColor.withOpacity(0.5),
                         fontSize: 15,
                       ),
+
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide.none,
@@ -139,10 +154,10 @@ class _CustomAnimatedTextFieldState extends State<CustomAnimatedTextField> {
           AnimatedPositioned(
             duration: const Duration(milliseconds: 250),
             left: 6,
-            top: _isFocused ? -2 : 20,
+            top: shouldFloat ? -2 : 20,
             child: AnimatedOpacity(
               duration: const Duration(milliseconds: 250),
-              opacity: _isFocused ? 1 : 0,
+              opacity: shouldFloat ? 1 : 0,
               child: Container(
                 color: const Color(0xFFF8F9FD),
                 padding: const EdgeInsets.symmetric(horizontal: 2),
