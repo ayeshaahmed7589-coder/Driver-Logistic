@@ -40,7 +40,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 "koovs",
                 style: TextStyle(
                   color: blueColor,
-                  fontSize: 46,
+                  fontSize: 50,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -134,13 +134,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
               gapH64,
               gapH48,
 
-              CustomButton(
-                isChecked: isChecked,
-                text: "Register Now",
-                backgroundColor: blueColor,
-                borderColor: blueColor,
-                textColor: Colors.white,
-                onPressed: () {},
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: CustomButton(
+                  isChecked: isChecked,
+                  text: "Sign Up",
+                  backgroundColor: blueColor,
+                  borderColor: blueColor,
+                  textColor: Colors.white,
+                  onPressed: () {},
+                ),
               ),
 
               const SizedBox(height: 30),

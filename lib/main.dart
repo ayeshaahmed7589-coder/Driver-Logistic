@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logisticdriverapp/features/authentication/otp.dart';
 import 'package:logisticdriverapp/features/authentication/register.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
 
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home:  SignUpScreen(),
+      home:  VerificationScreen(),
     );
   }
 }
