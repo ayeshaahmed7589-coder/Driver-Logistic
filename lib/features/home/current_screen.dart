@@ -3,6 +3,7 @@ import 'package:logisticdriverapp/common_widgets/appbar_widget.dart';
 import 'package:logisticdriverapp/common_widgets/custom_text.dart';
 import 'package:logisticdriverapp/features/home/completed_screen.dart';
 import 'package:logisticdriverapp/features/home/future_screen.dart';
+import 'package:logisticdriverapp/features/home/order_detail_screen.dart';
 
 class CurrentScreen extends StatefulWidget {
   const CurrentScreen({super.key});
@@ -98,140 +99,145 @@ class _CurrentScreenState extends State<CurrentScreen>
       itemCount: trips.length,
       itemBuilder: (context, index) {
         final trip = trips[index];
-        return Container(
-          margin: const EdgeInsets.only(bottom: 16),
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.05),
-                blurRadius: 6,
-                offset: const Offset(0, 3),
-              ),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    trip['name']!,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: blueColor,
-                    ),
-                  ),
-                  Text(
-                    "Dist: ${trip['distance']}",
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Color(0xFF1A56DB),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8),
-              Row(
-                children: [
-                  Icon(Icons.location_on_outlined, color: blueColor, size: 18),
-                  const SizedBox(width: 6),
-                  Expanded(
-                    child: Text(
-                      trip['address']!,
-                      style: const TextStyle(
-                        color: Colors.black87,
-                        fontSize: 13,
+        return GestureDetector(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>OrderDetailsScreen()));
+          },
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 16),
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 6,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      trip['name']!,
+                      style: TextStyle(
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
+                        color: blueColor,
                       ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 6),
-              Row(
-                children: [
-                  Icon(Icons.shopping_bag_outlined, color: blueColor, size: 18),
-                  const SizedBox(width: 6),
-                  Text(
-                    trip['product']!,
-                    style: const TextStyle(color: Colors.black54, fontSize: 13),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 6),
-              Row(
-                children: [
-                  Icon(Icons.attach_money, color: blueColor, size: 18),
-                  const SizedBox(width: 6),
-                  Text(
-                    "Price - ${trip['price']}",
-                    style: const TextStyle(color: Colors.black54, fontSize: 13),
-                  ),
-                ],
-              ),
-              const Divider(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: 110,
-                    height: 28,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF1A56DB),
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                    child: CustomText(
-                      txt: trip['workOrder']!,
-                      fontSize: 13,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-
-                  // ElevatedButton(
-                  //   style: ElevatedButton.styleFrom(
-                  //     backgroundColor: const Color(0xFF1A56DB),
-                  //     padding: const EdgeInsets.symmetric(
-                  //       horizontal: 20,
-                  //       vertical: 10,
-                  //     ),
-                  //     shape: RoundedRectangleBorder(
-                  //       borderRadius: BorderRadius.circular(6),
-                  //     ),
-                  //   ),
-                  //   onPressed: () {},
-                  //   child: Text(
-                  //     trip['workOrder']!,
-                  //     style: const TextStyle(fontSize: 13),
-                  //   ),
-                  // ),
-                  Container(
-                    width: 35,
-                    height: 35,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF1A56DB),
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: Text(
-                      trip['index']!,
+                    Text(
+                      "Dist: ${trip['distance']}",
                       style: const TextStyle(
-                        color: Colors.white,
                         fontSize: 16,
+                        color: Color(0xFF1A56DB),
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    Icon(Icons.location_on_outlined, color: blueColor, size: 18),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: Text(
+                        trip['address']!,
+                        style: const TextStyle(
+                          color: Colors.black87,
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 6),
+                Row(
+                  children: [
+                    Icon(Icons.shopping_bag_outlined, color: blueColor, size: 18),
+                    const SizedBox(width: 6),
+                    Text(
+                      trip['product']!,
+                      style: const TextStyle(color: Colors.black54, fontSize: 13),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 6),
+                Row(
+                  children: [
+                    Icon(Icons.attach_money, color: blueColor, size: 18),
+                    const SizedBox(width: 6),
+                    Text(
+                      "Price - ${trip['price']}",
+                      style: const TextStyle(color: Colors.black54, fontSize: 13),
+                    ),
+                  ],
+                ),
+                const Divider(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: 110,
+                      height: 28,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF1A56DB),
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                      child: CustomText(
+                        txt: trip['workOrder']!,
+                        fontSize: 13,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+          
+                    // ElevatedButton(
+                    //   style: ElevatedButton.styleFrom(
+                    //     backgroundColor: const Color(0xFF1A56DB),
+                    //     padding: const EdgeInsets.symmetric(
+                    //       horizontal: 20,
+                    //       vertical: 10,
+                    //     ),
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(6),
+                    //     ),
+                    //   ),
+                    //   onPressed: () {},
+                    //   child: Text(
+                    //     trip['workOrder']!,
+                    //     style: const TextStyle(fontSize: 13),
+                    //   ),
+                    // ),
+                    Container(
+                      width: 35,
+                      height: 35,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF1A56DB),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        trip['index']!,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         );
       },

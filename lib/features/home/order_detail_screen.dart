@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logisticdriverapp/common_widgets/custom_text.dart';
 import '../../common_widgets/cuntom_textfield.dart';
 import '../../common_widgets/custom_button.dart';
 
@@ -54,11 +55,11 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
       appBar: AppBar(
         title: const Text(
           "Order Details",
-          style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         elevation: 0,
-        toolbarHeight: 35,
+        toolbarHeight: 45,
         leading: const Icon(Icons.arrow_back_ios, size: 18),
         backgroundColor: blueColor,
         foregroundColor: Colors.white,
@@ -73,13 +74,12 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
             const SizedBox(height: 23),
 
             // --- Delivery Requests Heading ---
-            const Text(
-              "Delivery Requests (02)",
-              style: TextStyle(
-                fontSize: 19,
-                fontWeight: FontWeight.w500,
-                color: Colors.black,
-              ),
+            CustomText(
+              txt: "Delivery Requests (02)",
+
+              fontSize: 17,
+              fontWeight: FontWeight.w500,
+              color: Colors.black,
             ),
             const SizedBox(height: 14),
 
@@ -90,73 +90,79 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
 
             // --- Toggle Switch ---
             Row(
-  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  children: [
-    const Text(
-      "Mark as Undelivered",
-      style: TextStyle(fontSize: 18, color: Colors.black87),
-    ),
-
-    // 🔹 Custom ON/OFF Toggle Button
-    Container(
-      width: 120, // fixed width for clean layout
-      height: 40,
-      decoration: BoxDecoration(
-        color: Colors.grey.shade300,
-        borderRadius: BorderRadius.circular(30),
-      ),
-      child: Row(
-        children: [
-          // OFF button
-          Expanded(
-            child: GestureDetector(
-              onTap: () => setState(() => isUndelivered = false),
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 250),
-                decoration: BoxDecoration(
-                  color: !isUndelivered ? blueColor : Colors.grey.shade300,
-                  borderRadius: BorderRadius.circular(30),
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Mark as Undelivered",
+                  style: TextStyle(fontSize: 16, color: Colors.black87),
                 ),
-                alignment: Alignment.center,
-                child: Text(
-                  "OFF",
-                  style: TextStyle(
-                    color: !isUndelivered ? Colors.white : Colors.black54,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
+
+                Container(
+                  width: 90,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade300,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Row(
+                    children: [
+                      // OFF button
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () => setState(() => isUndelivered = false),
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 250),
+                            decoration: BoxDecoration(
+                              color: !isUndelivered
+                                  ? blueColor
+                                  : Colors.grey.shade300,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              "OFF",
+                              style: TextStyle(
+                                color: !isUndelivered
+                                    ? Colors.white
+                                    : Colors.black54,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      // ON button
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () => setState(() => isUndelivered = true),
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 250),
+                            decoration: BoxDecoration(
+                              color: isUndelivered
+                                  ? blueColor
+                                  : Colors.grey.shade300,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              "ON",
+                              style: TextStyle(
+                                color: isUndelivered
+                                    ? Colors.white
+                                    : Colors.black54,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
+              ],
             ),
-          ),
-          // ON button
-          Expanded(
-            child: GestureDetector(
-              onTap: () => setState(() => isUndelivered = true),
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 250),
-                decoration: BoxDecoration(
-                  color: isUndelivered ? blueColor : Colors.grey.shade300,
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  "ON",
-                  style: TextStyle(
-                    color: isUndelivered ? Colors.white : Colors.black54,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-            ),
-          ),
-
-        ],
-      ),
-    ),
-  ],
-),
 
             const SizedBox(height: 10),
 
@@ -281,7 +287,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 "John Doe",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 22,
+                  fontSize: 18,
                   color: blueColor,
                 ),
               ),
@@ -338,12 +344,12 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           // --- Call Button ---
           Row(
             children: [
-              Icon(Icons.phone_outlined, color: blueColor, size: 24),
+              Icon(Icons.phone_outlined, color: blueColor, size: 22),
               SizedBox(width: 6),
               Text(
                 "Call Customer",
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 16,
                   fontWeight: FontWeight.w800,
                   color: blueColor,
                 ),
@@ -380,18 +386,17 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      "FMPP189153529",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w800,
-                        color: Colors.black87,
-                      ),
+                    CustomText(
+                      txt: "FMPP189153529",
+
+                      fontSize: 17,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.black87,
                     ),
                     ElevatedButton.icon(
                       onPressed: () {},
                       icon: const Icon(Icons.qr_code_scanner, size: 22),
-                      label: const Text("Scan", style: TextStyle(fontSize: 18)),
+                      label: const Text("Scan", style: TextStyle(fontSize: 16)),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: blueColor,
                         foregroundColor: Colors.white,
@@ -413,7 +418,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 const SizedBox(height: 4),
                 const Text(
                   "RIGO Men Jump Printed Terry Joggers",
-                  style: TextStyle(fontSize: 16, color: Colors.black),
+                  style: TextStyle(fontSize: 15, color: Colors.black),
                 ),
                 const SizedBox(height: 6),
                 const Text(
