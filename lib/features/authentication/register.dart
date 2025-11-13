@@ -1,8 +1,6 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:logisticdriverapp/common_widgets/cuntom_textfield.dart';
-import 'package:logisticdriverapp/common_widgets/custom_button.dart';
-import 'package:logisticdriverapp/constants/gap.dart';
+
+import '../../export.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

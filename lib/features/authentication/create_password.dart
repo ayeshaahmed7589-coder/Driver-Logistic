@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:logisticdriverapp/common_widgets/cuntom_textfield.dart';
-import 'package:logisticdriverapp/common_widgets/custom_button.dart';
-import 'package:logisticdriverapp/common_widgets/custom_text.dart';
-import 'package:logisticdriverapp/constants/gap.dart';
+
+import '../../export.dart';
+
 
 class CreatePasswordScreen extends StatefulWidget {
   const CreatePasswordScreen({Key? key}) : super(key: key);

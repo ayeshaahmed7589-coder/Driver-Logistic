@@ -1,8 +1,8 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import '../../common_widgets/cuntom_textfield.dart';
-import '../../common_widgets/custom_button.dart';
+
+import '../../export.dart';
+export '../../common_widgets/cuntom_textfield.dart';
+export '../../common_widgets/custom_button.dart';
 
 class SetUpProfile extends StatefulWidget {
   const SetUpProfile({super.key});
@@ -22,7 +22,6 @@ class _SetUpProfileState extends State<SetUpProfile> {
   final FocusNode mobileFocus = FocusNode();
   final FocusNode dobFocus = FocusNode();
 
-  bool _showNewPassEye = false;
   bool isChecked = false;
   XFile? profileImage;
 

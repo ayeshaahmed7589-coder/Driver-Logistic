@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:logisticdriverapp/features/authentication/create_password.dart';
-import 'package:logisticdriverapp/features/authentication/login.dart';
-import 'package:logisticdriverapp/features/authentication/otp.dart';
-import 'package:logisticdriverapp/features/authentication/register.dart';
+import 'export.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,12 +11,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Logistic Driver',
       theme: ThemeData(
-
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home:  Login(),
+      home: ForgotPassword(),
     );
   }
 }

@@ -1,23 +1,20 @@
-
 import 'package:flutter/material.dart';
 
 import '../../export.dart';
 
-
-class Login extends StatefulWidget {
-  const Login({super.key});
+class ForgotPassword extends StatefulWidget {
+  const ForgotPassword({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<ForgotPassword> createState() => _ForgotPasswordState();
 }
 
-class _LoginState extends State<Login> {
+class _ForgotPasswordState extends State<ForgotPassword> {
   final emailFocus = FocusNode();
   // final FocusNode _focusNode = FocusNode();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController PasswordController = TextEditingController();
   final passwordFocus = FocusNode();
-  bool _obscureNewPass = true;
 
   bool _showNewPassEye = false;
   bool _isFormFilled = false;
@@ -82,7 +79,7 @@ class _LoginState extends State<Login> {
               ),
               gapH32,
               Text(
-                "Welcome Back",
+                "Forgot Password",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -91,7 +88,7 @@ class _LoginState extends State<Login> {
               ),
               const SizedBox(height: 10),
               const Text(
-                "Please enter your email id or password to Sign In.",
+                "Please enter your Register email\naddress to reset your password",
                 style: TextStyle(color: Colors.black54, fontSize: 14),
                 textAlign: TextAlign.center,
               ),
@@ -117,88 +114,23 @@ class _LoginState extends State<Login> {
                   return null;
                 },
               ),
-              gapH8,
 
-              /// New Password Field
-              CustomAnimatedTextField(
-                controller: PasswordController,
-                focusNode: passwordFocus,
-                labelText: "Password",
-                hintText: "Password",
-                prefixIcon: Icons.lock_outline,
-                iconColor: blueColor,
-                borderColor: blueColor,
-                textColor: Colors.black87,
-                obscureText: _obscureNewPass,
-                suffixIcon: _showNewPassEye
-                    ? IconButton(
-                        icon: Icon(
-                          _obscureNewPass
-                              ? Icons.visibility_off_outlined
-                              : Icons.visibility_outlined,
-                          color: Colors.black,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _obscureNewPass = !_obscureNewPass;
-                          });
-                        },
-                      )
-                    : null,
-              ),
-
-              gapH24,
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  CustomText(
-                    txt: "Forgot Password",
-                    color: blueColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                  ),
-                ],
-              ),
-              gapH64,
-              gapH32,
+              SizedBox(height: 300),
 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: CustomButton(
                   isChecked: _isOtpFilled,
-                  text: "Sign In",
+                  text: "Submit",
                   backgroundColor: _isFormFilled ? blueColor : inactiveColor,
                   borderColor: blueColor,
                   textColor: Colors.white,
                   onPressed: _isFormFilled
                       ? () {
-                          debugPrint("Sign In pressed");
+                          debugPrint("Submit");
                         }
                       : null,
                 ),
-              ),
-
-              gapH32,
-
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Don't have an account",
-                    style: TextStyle(color: Colors.black54, fontSize: 14),
-                  ),
-                  Text(
-                    "Sign Up",
-                    style: TextStyle(
-                      color: blueColor,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14,
-                      decoration: TextDecoration.underline,
-                      decorationColor: blueColor,
-                    ),
-                  ),
-                ],
               ),
             ],
           ),
