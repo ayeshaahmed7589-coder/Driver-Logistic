@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logisticdriverapp/export.dart';
+import 'package:logisticdriverapp/features/home/notification_screen.dart';
 
 class BuyerAppBarWidget extends StatelessWidget {
   BuyerAppBarWidget({
@@ -62,10 +63,20 @@ class BuyerAppBarWidget extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.only(right: 0, top: 10),
-                  child: Icon(
-                    Icons.notifications_none,
-                    color: Colors.white,
-                    size: 25,
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => NotificationScreen(),
+                        ),
+                      );
+                    },
+                    icon: Icon(
+                      Icons.notifications_none,
+                      color: Colors.white,
+                      size: 25,
+                    ),
                   ),
                 ),
               ],
