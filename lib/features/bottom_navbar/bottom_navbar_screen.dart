@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logisticdriverapp/features/home/current_screen.dart';
+import 'package:logisticdriverapp/features/home/get_profile_screen.dart';
 
 class TripsBottomNavBarScreen extends StatefulWidget {
   final int initialIndex;
@@ -17,8 +18,7 @@ class _TripsBottomNavBarScreenState extends State<TripsBottomNavBarScreen> {
     CurrentScreen(), // your Trips screen
     Center(child: Text("Tracking")),
     Center(child: Text("Summary Screen")),
-    Center(child: Text("Profile Screen")),
-
+    GetProfileScreen(),
   ];
 
   @override
@@ -36,13 +36,7 @@ class _TripsBottomNavBarScreenState extends State<TripsBottomNavBarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-        children: [
-          Expanded(
-            child: _screens[_selectedIndex],
-          ),
-        ],
-      ),
+      body: Column(children: [Expanded(child: _screens[_selectedIndex])]),
       // body: SafeArea(child: _screens[_selectedIndex]),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
@@ -64,7 +58,7 @@ class _TripsBottomNavBarScreenState extends State<TripsBottomNavBarScreen> {
             icon: Icon(Icons.person_outline),
             label: "Summary",
           ),
-             BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),
             label: "Profile",
           ),
