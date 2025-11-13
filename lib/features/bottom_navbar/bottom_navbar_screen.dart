@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logisticdriverapp/features/home/current_screen.dart';
 import 'package:logisticdriverapp/features/home/get_profile_screen.dart';
+import 'package:logisticdriverapp/features/home/summary_screen.dart';
 
 class TripsBottomNavBarScreen extends StatefulWidget {
   final int initialIndex;
@@ -17,7 +18,7 @@ class _TripsBottomNavBarScreenState extends State<TripsBottomNavBarScreen> {
   final List<Widget> _screens = const [
     CurrentScreen(), // your Trips screen
     Center(child: Text("Tracking")),
-    Center(child: Text("Summary Screen")),
+    SummaryScreen(),
     GetProfileScreen(),
   ];
 
