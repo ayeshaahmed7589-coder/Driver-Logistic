@@ -60,7 +60,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
         centerTitle: true,
         elevation: 0,
         toolbarHeight: 45,
-        leading: const Icon(Icons.arrow_back_ios, size: 18),
+        leading: IconButton(
+          onPressed: () {
+            // context.pop();
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_ios, size: 18),
+        ),
         backgroundColor: blueColor,
         foregroundColor: Colors.white,
       ),
