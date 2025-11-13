@@ -33,6 +33,19 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    dobController.dispose();
+    noteController.dispose();
+    dobFocus.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     const Color blueColor = Color(0xFF004DEB);
 
@@ -41,12 +54,12 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
       appBar: AppBar(
         title: const Text(
           "Order Details",
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         elevation: 0,
         toolbarHeight: 35,
-        leading: const Icon(Icons.arrow_back_ios, size: 16),
+        leading: const Icon(Icons.arrow_back_ios, size: 18),
         backgroundColor: blueColor,
         foregroundColor: Colors.white,
       ),
@@ -57,43 +70,94 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           children: [
             // --- Customer Card ---
             buildCustomerCard(blueColor),
-            const SizedBox(height: 20),
+            const SizedBox(height: 23),
 
             // --- Delivery Requests Heading ---
             const Text(
               "Delivery Requests (02)",
               style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
-                color: Colors.black87,
+                fontSize: 19,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 14),
 
             buildProductCard(blueColor),
-            const SizedBox(height: 10),
+            const SizedBox(height: 18),
             buildProductCard(blueColor),
             const SizedBox(height: 20),
 
             // --- Toggle Switch ---
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  "Mark as Undelivered",
-                  style: TextStyle(fontSize: 14, color: Colors.black87),
+  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  children: [
+    const Text(
+      "Mark as Undelivered",
+      style: TextStyle(fontSize: 18, color: Colors.black87),
+    ),
+
+    // 🔹 Custom ON/OFF Toggle Button
+    Container(
+      width: 120, // fixed width for clean layout
+      height: 40,
+      decoration: BoxDecoration(
+        color: Colors.grey.shade300,
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: Row(
+        children: [
+          // OFF button
+          Expanded(
+            child: GestureDetector(
+              onTap: () => setState(() => isUndelivered = false),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 250),
+                decoration: BoxDecoration(
+                  color: !isUndelivered ? blueColor : Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(30),
                 ),
-                Switch(
-                  value: isUndelivered,
-                  onChanged: (v) {
-                    setState(() {
-                      isUndelivered = v;
-                    });
-                  },
-                  activeColor: blueColor,
+                alignment: Alignment.center,
+                child: Text(
+                  "OFF",
+                  style: TextStyle(
+                    color: !isUndelivered ? Colors.white : Colors.black54,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
                 ),
-              ],
+              ),
             ),
+          ),
+          // ON button
+          Expanded(
+            child: GestureDetector(
+              onTap: () => setState(() => isUndelivered = true),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 250),
+                decoration: BoxDecoration(
+                  color: isUndelivered ? blueColor : Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  "ON",
+                  style: TextStyle(
+                    color: isUndelivered ? Colors.white : Colors.black54,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+        ],
+      ),
+    ),
+  ],
+),
+
             const SizedBox(height: 10),
 
             // --- Conditional Notes + Date + Confirm ---
@@ -121,8 +185,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     const Text(
                       "Add Notes",
                       style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 17,
                         color: Colors.black87,
                       ),
                     ),
@@ -142,108 +206,29 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 20),
 
-                    const Text(
-                      "Select Next Delivery Date",
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: Colors.black54,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-
-                    GestureDetector(
-                      onTap: selectDate,
-                      child: // 🔹 Date of Birth
-                      CustomAnimatedTextField(
-                        controller: dobController,
-                        focusNode: dobFocus,
-                        labelText: "Select Next Delivery Date",
-                        hintText: "DD/MM/YYYY",
-                        prefixIcon: Icons.calendar_today_outlined,
-                        iconColor: blueColor,
-                        borderColor: blueColor,
-                        textColor: Colors.black87,
-                        keyboardType: TextInputType.datetime,
+                    // 🔹 Date of Birth
+                    CustomAnimatedTextField(
+                      controller: dobController,
+                      focusNode: dobFocus,
+                      labelText: "Select Next Delivery Date",
+                      hintText: "Select Next Delivery Date",
+                      prefixIcon: Icons.calendar_today_outlined,
+                      iconColor: blueColor,
+                      borderColor: blueColor,
+                      textColor: Colors.black87,
+                      keyboardType: TextInputType.datetime,
+                      suffixIcon: IconButton(
+                        icon: const Icon(Icons.keyboard_arrow_down_rounded),
+                        color: blueColor,
+                        onPressed: selectDate,
                       ),
                     ),
                   ],
                 ),
               ),
               const SizedBox(height: 15),
-
-              // --- Date Picker Field ---
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 4,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    InkWell(
-                      onTap: () async {
-                        final pickedDate = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(2020),
-                          lastDate: DateTime(2030),
-                        );
-                        if (pickedDate != null) {
-                          setState(() {
-                            selectedDate = pickedDate;
-                          });
-                        }
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 14,
-                        ),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: blueColor, width: 1),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                const Icon(
-                                  Icons.calendar_today_outlined,
-                                  size: 18,
-                                  color: blueColor,
-                                ),
-                                const SizedBox(width: 8),
-                                Text(
-                                  selectedDate != null
-                                      ? "${selectedDate!.day}-${selectedDate!.month}-${selectedDate!.year}"
-                                      : "Select date",
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black87,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const Icon(Icons.arrow_drop_down, color: blueColor),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
             ],
             const SizedBox(height: 25),
             // --- Confirm Button ---
@@ -296,14 +281,14 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 "John Doe",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 18,
+                  fontSize: 22,
                   color: blueColor,
                 ),
               ),
               Text(
                 "Dist: 14 mi",
                 style: TextStyle(
-                  fontSize: 13,
+                  fontSize: 16,
                   fontWeight: FontWeight.w800,
                   color: blueColor,
                 ),
@@ -319,7 +304,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
               Expanded(
                 child: Text(
                   "6391 Elgin St. Celina, Delaware 10299",
-                  style: TextStyle(fontSize: 13, color: Colors.black87),
+                  style: TextStyle(fontSize: 14, color: Colors.black87),
                 ),
               ),
               Icon(Icons.directions, color: blueColor),
@@ -332,7 +317,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
               SizedBox(width: 6),
               Text(
                 "Product - 02",
-                style: TextStyle(fontSize: 13, color: Colors.grey),
+                style: TextStyle(fontSize: 14, color: Colors.grey),
               ),
             ],
           ),
@@ -343,7 +328,25 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
               SizedBox(width: 6),
               Text(
                 "Price - \$52.01",
-                style: TextStyle(fontSize: 13, color: Colors.grey),
+                style: TextStyle(fontSize: 14, color: Colors.grey),
+              ),
+            ],
+          ),
+          const SizedBox(height: 11),
+          const Divider(height: 1),
+          const SizedBox(height: 13),
+          // --- Call Button ---
+          Row(
+            children: [
+              Icon(Icons.phone_outlined, color: blueColor, size: 24),
+              SizedBox(width: 6),
+              Text(
+                "Call Customer",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800,
+                  color: blueColor,
+                ),
               ),
             ],
           ),
@@ -380,15 +383,15 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     const Text(
                       "FMPP189153529",
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 20,
                         fontWeight: FontWeight.w800,
                         color: Colors.black87,
                       ),
                     ),
                     ElevatedButton.icon(
                       onPressed: () {},
-                      icon: const Icon(Icons.qr_code_scanner, size: 17),
-                      label: const Text("Scan"),
+                      icon: const Icon(Icons.qr_code_scanner, size: 22),
+                      label: const Text("Scan", style: TextStyle(fontSize: 18)),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: blueColor,
                         foregroundColor: Colors.white,
@@ -410,13 +413,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 const SizedBox(height: 4),
                 const Text(
                   "RIGO Men Jump Printed Terry Joggers",
-                  style: TextStyle(fontSize: 14, color: Colors.black87),
+                  style: TextStyle(fontSize: 16, color: Colors.black),
                 ),
                 const SizedBox(height: 6),
                 const Text(
                   "Qty: 01 | Price: \$52.01",
                   style: TextStyle(
-                    fontSize: 13,
+                    fontSize: 15,
                     color: Color(0xFF004DEB),
                     fontWeight: FontWeight.w900,
                   ),
