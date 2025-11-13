@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logisticdriverapp/common_widgets/custom_text.dart';
+import 'package:logisticdriverapp/features/home/order_successful.dart';
 import '../../common_widgets/cuntom_textfield.dart';
 import '../../common_widgets/custom_button.dart';
 
@@ -253,9 +254,10 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 textColor: isUndelivered ? Colors.white : blueColor,
                 onPressed: isUndelivered
                     ? () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Confirmed as Undelivered!"),
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => OrderSuccessful(),
                           ),
                         );
                       }
