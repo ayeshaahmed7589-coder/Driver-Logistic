@@ -3,6 +3,7 @@ import 'package:logisticdriverapp/common_widgets/custom_text.dart';
 import 'package:logisticdriverapp/features/home/order_successful.dart';
 import '../../common_widgets/cuntom_textfield.dart';
 import '../../common_widgets/custom_button.dart';
+import '../../export.dart';
 
 class OrderDetailsScreen extends StatefulWidget {
   const OrderDetailsScreen({super.key});
@@ -402,7 +403,14 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       color: Colors.black87,
                     ),
                     ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ScanBarCodeScreen(),
+                          ),
+                        );
+                      },
                       icon: const Icon(Icons.qr_code_scanner, size: 22),
                       label: const Text("Scan", style: TextStyle(fontSize: 16)),
                       style: ElevatedButton.styleFrom(
