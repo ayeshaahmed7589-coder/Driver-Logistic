@@ -86,7 +86,7 @@ class BuyerAppBarWidget extends StatelessWidget {
             TabBar(
               controller: tabController,
               indicator: UnderlineTabIndicator(
-                borderSide: BorderSide(width: 4.0, color: Colors.white),
+                borderSide: BorderSide(width: 6.0, color: Colors.white),
                 insets: EdgeInsets.symmetric(horizontal: 16.0),
               ),
               indicatorSize: TabBarIndicatorSize.tab,

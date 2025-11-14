@@ -68,7 +68,7 @@ class _CurrentScreenState extends State<CurrentScreen>
     return Scaffold(
       backgroundColor: const Color(0xFFF3F6FA),
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(screenHeight * 0.12),
+        preferredSize: Size.fromHeight(screenHeight * 0.13),
         child: BuyerAppBarWidget(
           controller: controller,
           segmentControlValue: segmentValue,
