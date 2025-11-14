@@ -37,7 +37,7 @@ class _MapScreenState extends State<MapScreen> {
             left: 20,
             child: GestureDetector(
               onTap: () {
-                Navigator.pop(context);
+                // Navigator.pop(context);
               },
               child: Container(
                 decoration: BoxDecoration(
