@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logisticdriverapp/export.dart';
 
 import '../authentication/login.dart';
 
@@ -18,22 +19,25 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
 
-    // Animation
+    // Animation Controller
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 900),
+      duration: const Duration(milliseconds: 1500),
     );
 
     _animation = Tween<Offset>(
-      begin: const Offset(0, 2.5),
-      end: const Offset(0, 0),
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutBack));
+      begin: const Offset(0, 0.2),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticOut));
 
     _controller.forward();
 
     // Navigate after delay
     Future.delayed(const Duration(seconds: 2), () {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => Login()),
+      );
     });
   }
 
@@ -46,18 +50,48 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF3F4F9), // same grey background
+      backgroundColor: const Color(0xffF3F4F9),
       body: Center(
         child: SlideTransition(
           position: _animation,
-          child: Text(
-            "DROVVI",
-            style: TextStyle(
-              color: Color(0xff10CFCF),
-              fontSize: 48,
-              fontWeight: FontWeight.w700,
-              letterSpacing: 2,
-            ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                "DROVVI",
+                style: TextStyle(
+                  color: const Color(0xff10CFCF),
+                  fontSize: 48,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 2,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 10,
+                      color: Colors.black.withOpacity(0.1),
+                      offset: const Offset(2, 2),
+                    ),
+                  ],
+                ),
+              ),
+              gapH4,
+              Text(
+                "Driver",
+                style: TextStyle(
+                  color: const Color(0xff10CFCF),
+                  fontSize: 30,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 2,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 10,
+                      color: Colors.black.withOpacity(0.1),
+                      offset: const Offset(2, 2),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
