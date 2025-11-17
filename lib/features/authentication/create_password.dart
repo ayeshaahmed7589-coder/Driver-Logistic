@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:logisticdriverapp/constants/colors.dart';
 
 import '../../export.dart';
-
 
 class CreatePasswordScreen extends StatefulWidget {
   const CreatePasswordScreen({Key? key}) : super(key: key);
@@ -58,10 +58,8 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const Color blueColor = Color(0xFF2F5DF2);
-
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F9FD),
+      backgroundColor: AppColors.lightGrayBackground,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 24),
@@ -72,8 +70,8 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
 
               /// App Title
               CustomText(
-                txt: "koovs",
-                color: blueColor,
+                txt: "DROVVI",
+                color: AppColors.electricTeal,
                 fontSize: 50,
                 fontWeight: FontWeight.bold,
               ),
@@ -82,7 +80,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
               /// Page Heading
               CustomText(
                 txt: "Create New Password",
-                color: blueColor,
+                color: AppColors.electricTeal,
                 fontSize: 25,
                 fontWeight: FontWeight.w700,
               ),
@@ -93,7 +91,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                 txt:
                     "Set your new password so you can Log In\nand access Resolve",
                 align: TextAlign.center,
-                color: Colors.black54,
+                color: AppColors.mediumGray,
                 fontSize: 14,
                 height: 1.5,
               ),
@@ -107,9 +105,9 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                 labelText: "New Password",
                 hintText: "New Password",
                 prefixIcon: Icons.lock_outline,
-                iconColor: blueColor,
-                borderColor: blueColor,
-                textColor: Colors.black87,
+                iconColor: AppColors.electricTeal,
+                borderColor: AppColors.electricTeal,
+                textColor: AppColors.darkText,
                 obscureText: _obscureNewPass,
                 suffixIcon: _showNewPassEye
                     ? IconButton(
@@ -117,7 +115,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                           _obscureNewPass
                               ? Icons.visibility_off_outlined
                               : Icons.visibility_outlined,
-                          color: Colors.black,
+                          color: AppColors.darkText,
                         ),
                         onPressed: () {
                           setState(() {
@@ -136,9 +134,9 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                 labelText: "Confirm Password",
                 hintText: "Confirm Password",
                 prefixIcon: Icons.lock_outline,
-                iconColor: blueColor,
-                borderColor: blueColor,
-                textColor: Colors.black87,
+                iconColor: AppColors.electricTeal,
+                borderColor: AppColors.electricTeal,
+                textColor: AppColors.darkText,
                 obscureText: _obscureConPass,
                 suffixIcon: _showConPassEye
                     ? IconButton(
@@ -146,7 +144,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                           _obscureConPass
                               ? Icons.visibility_off_outlined
                               : Icons.visibility_outlined,
-                          color: Colors.black,
+                          color: AppColors.darkText,
                         ),
                         onPressed: () {
                           setState(() {
@@ -164,11 +162,14 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: CustomButton(
                   text: "Sign Up",
-                  backgroundColor: blueColor,
-                  borderColor: blueColor,
-                  textColor: Colors.white,
+                  backgroundColor: AppColors.electricTeal,
+                  borderColor: AppColors.electricTeal,
+                  textColor: AppColors.pureWhite,
                   onPressed: () {
-                    // Password logic yahan likho
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SetUpProfile()),
+                      );
                   },
                 ),
               ),
@@ -186,7 +187,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
-                        color: Colors.black87,
+                        color: AppColors.darkText,
                       ),
                     ),
                     SizedBox(height: 10),
@@ -220,10 +221,18 @@ class _PolicyItem extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 6),
       child: Row(
         children: [
-          const Icon(Icons.check_circle, color: Color(0xFF2F5DF2), size: 18),
+          const Icon(
+            Icons.check_circle,
+            color: AppColors.electricTeal,
+            size: 18,
+          ),
           const SizedBox(width: 8),
           Expanded(
-            child: CustomText(txt: text, color: Colors.black54, fontSize: 13),
+            child: CustomText(
+              txt: text,
+              color: AppColors.mediumGray,
+              fontSize: 13,
+            ),
           ),
         ],
       ),

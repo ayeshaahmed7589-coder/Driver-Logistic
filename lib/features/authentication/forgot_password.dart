@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logisticdriverapp/constants/colors.dart';
 
 import '../../export.dart';
 
@@ -23,8 +24,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   void initState() {
     super.initState();
     PasswordController.addListener(_passwordListener);
-    emailController.addListener(_checkFormFilled); // jab email change ho
-    PasswordController.addListener(_checkFormFilled); // jab password change ho
+    emailController.addListener(_checkFormFilled);
+    PasswordController.addListener(_checkFormFilled);
   }
 
   void _passwordListener() {
@@ -47,8 +48,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   // bool isChecked = false;
   bool _isOtpFilled = false;
 
-  final Color blueColor = const Color(0xFF345CFF);
-
   @override
   void dispose() {
     emailFocus.dispose();
@@ -60,9 +59,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
   @override
   Widget build(BuildContext context) {
-    final Color inactiveColor = Colors.grey.shade400;
+    final Color inactiveColor = AppColors.mediumGray;
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F9FD),
+      backgroundColor: AppColors.lightGrayBackground,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
@@ -72,7 +71,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               Text(
                 "koovs",
                 style: TextStyle(
-                  color: blueColor,
+                  color: AppColors.electricTeal,
                   fontSize: 50,
                   fontWeight: FontWeight.bold,
                 ),
@@ -83,13 +82,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: blueColor,
+                  color: AppColors.electricTeal,
                 ),
               ),
               const SizedBox(height: 10),
               const Text(
                 "Please enter your Register email\naddress to reset your password",
-                style: TextStyle(color: Colors.black54, fontSize: 14),
+                style: TextStyle(color: AppColors.mediumGray, fontSize: 14),
                 textAlign: TextAlign.center,
               ),
               gapH20,
@@ -100,9 +99,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 labelText: "Email ID",
                 hintText: "Email ID",
                 prefixIcon: Icons.email_outlined,
-                iconColor: blueColor,
-                borderColor: blueColor,
-                textColor: Colors.black87,
+                iconColor: AppColors.electricTeal,
+                borderColor: AppColors.electricTeal,
+                textColor: AppColors.mediumGray,
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -122,9 +121,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 child: CustomButton(
                   isChecked: _isOtpFilled,
                   text: "Submit",
-                  backgroundColor: _isFormFilled ? blueColor : inactiveColor,
-                  borderColor: blueColor,
-                  textColor: Colors.white,
+                  backgroundColor: _isFormFilled
+                      ? AppColors.electricTeal
+                      : inactiveColor,
+                  borderColor: AppColors.electricTeal,
+                  textColor: AppColors.pureWhite,
                   onPressed: _isFormFilled
                       ? () {
                           debugPrint("Submit");

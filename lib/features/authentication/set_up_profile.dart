@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:logisticdriverapp/constants/colors.dart';
+import 'package:logisticdriverapp/features/authentication/register_successful.dart';
 
 import '../../export.dart';
 export '../../common_widgets/cuntom_textfield.dart';
@@ -86,27 +88,26 @@ class _SetUpProfileState extends State<SetUpProfile> {
 
   @override
   Widget build(BuildContext context) {
-    final Color blueColor = const Color(0xFF345CFF);
-
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F9FD),
+      backgroundColor: AppColors.lightGrayBackground,
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        toolbarHeight: 35, // 👈 Reduce height (default is 56)
+        automaticallyImplyLeading: false,
+        toolbarHeight: 35,
         title: const Text(
           "Set Up Profile",
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
-        foregroundColor: Colors.white,
-        backgroundColor: blueColor,
+        foregroundColor: AppColors.pureWhite,
+        backgroundColor: AppColors.electricTeal,
       ),
 
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
         child: Column(
           children: [
-            // 🔹 Profile Picture Section
+            // Profile Picture Section
             GestureDetector(
               onTap: pickProfileImage,
               child: Stack(
@@ -118,9 +119,12 @@ class _SetUpProfileState extends State<SetUpProfile> {
                     height: 150,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(color: blueColor, width: 2.5),
+                      border: Border.all(
+                        color: AppColors.electricTeal,
+                        width: 2.5,
+                      ),
                       color: profileImage == null
-                          ? blueColor.withOpacity(0.4)
+                          ? AppColors.electricTeal.withOpacity(0.4)
                           : Colors.transparent,
                       image: profileImage != null
                           ? DecorationImage(
@@ -130,22 +134,26 @@ class _SetUpProfileState extends State<SetUpProfile> {
                           : null,
                     ),
                     child: profileImage == null
-                        ? Icon(Icons.person, size: 0, color: blueColor)
+                        ? Icon(
+                            Icons.person,
+                            size: 0,
+                            color: AppColors.electricTeal,
+                          )
                         : null,
                   ),
 
-                  // 🔹 Blue overlay icon (only visible when no image is selected)
+                  //  Blue overlay icon (only visible when no image is selected)
                   if (profileImage == null)
                     Container(
                       width: 55,
                       height: 55,
                       decoration: BoxDecoration(
-                        color: blueColor,
+                        color: AppColors.electricTeal,
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(
                         Icons.person_outlined,
-                        color: Colors.white,
+                        color: AppColors.pureWhite,
                         size: 28,
                       ),
                     ),
@@ -161,78 +169,81 @@ class _SetUpProfileState extends State<SetUpProfile> {
 
             const SizedBox(height: 20),
 
-            // 🔹 First Name
+            //  First Name
             CustomAnimatedTextField(
               controller: firstNameController,
               focusNode: firstNameFocus,
               labelText: "First Name",
               hintText: "First Name",
               prefixIcon: Icons.person_outline,
-              iconColor: blueColor,
-              borderColor: blueColor,
-              textColor: Colors.black87,
+              iconColor: AppColors.electricTeal,
+              borderColor: AppColors.electricTeal,
+              textColor:AppColors.mediumGray,
             ),
             const SizedBox(height: 10),
 
-            // 🔹 Last Name
+            // Last Name
             CustomAnimatedTextField(
               controller: lastNameController,
               focusNode: lastNameFocus,
               labelText: "Last Name",
               hintText: "Last Name",
               prefixIcon: Icons.person_outline,
-              iconColor: blueColor,
-              borderColor: blueColor,
-              textColor: Colors.black87,
+              iconColor: AppColors.electricTeal,
+              borderColor: AppColors.electricTeal,
+              textColor: AppColors.mediumGray,
             ),
             const SizedBox(height: 10),
 
-            // 🔹 Mobile Number
+            //  Mobile Number
             CustomAnimatedTextField(
               controller: mobileController,
               focusNode: mobileFocus,
               labelText: "Mobile Number",
               hintText: "Mobile Number",
               prefixIcon: Icons.phone_outlined,
-              iconColor: blueColor,
-              borderColor: blueColor,
-              textColor: Colors.black87,
+              iconColor: AppColors.electricTeal,
+              borderColor: AppColors.electricTeal,
+              textColor:AppColors.mediumGray,
               keyboardType: TextInputType.phone,
             ),
             const SizedBox(height: 10),
 
-            // 🔹 Date of Birth
+            // Date of Birth
             CustomAnimatedTextField(
               controller: dobController,
               focusNode: dobFocus,
               labelText: "Date of Birth",
               hintText: "DD/MM/YYYY",
               prefixIcon: Icons.calendar_today_outlined,
-              iconColor: blueColor,
-              borderColor: blueColor,
+              iconColor: AppColors.electricTeal,
+              borderColor: AppColors.electricTeal,
               textColor: Colors.black87,
               keyboardType: TextInputType.datetime,
               suffixIcon: IconButton(
                 icon: const Icon(Icons.keyboard_arrow_down_rounded),
-                color: blueColor,
+                color: AppColors.electricTeal,
                 onPressed: selectDate,
               ),
             ),
 
             const SizedBox(height: 30),
 
-            // 🔹 Next Button
+            //  Next Button
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: CustomButton(
                 isChecked: isChecked,
                 text: "Next",
-                backgroundColor: blueColor,
-                borderColor: blueColor,
-                textColor: Colors.white,
+                backgroundColor: AppColors.electricTeal,
+                borderColor: AppColors.electricTeal,
+                textColor: AppColors.pureWhite,
                 onPressed: () {
                   if (isChecked) {
-                    // navigate to next screen
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => RegisterSuccessful()),
+                      );
                   }
                 },
               ),

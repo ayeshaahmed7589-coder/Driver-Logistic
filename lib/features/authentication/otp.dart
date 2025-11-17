@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:logisticdriverapp/constants/colors.dart';
 
 import '../../export.dart';
-
 
 class VerificationScreen extends StatefulWidget {
   const VerificationScreen({Key? key}) : super(key: key);
@@ -46,10 +46,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const Color blueColor = Color(0xFF2F5DF2);
-
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F9FD),
+      backgroundColor: AppColors.lightGrayBackground,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 24),
@@ -59,8 +57,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
               const SizedBox(height: 20),
               // App Logo / Title
               CustomText(
-                txt: "koovs",
-                color: blueColor,
+                txt: "DROVVI",
+                color: AppColors.electricTeal,
                 fontSize: 50,
                 fontWeight: FontWeight.bold,
               ),
@@ -70,7 +68,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
               CustomText(
                 txt: "Enter Verification Code",
 
-                color: blueColor,
+                color: AppColors.electricTeal,
                 fontSize: 25,
                 fontWeight: FontWeight.w700,
               ),
@@ -82,7 +80,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 txt:
                     "Please enter the 6-digit code we sent\nto your registered email address.",
                 align: TextAlign.center,
-                color: Colors.black54,
+                color: AppColors.mediumGray,
                 fontSize: 14,
                 height: 1.5,
               ),
@@ -96,11 +94,15 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   CustomText(
                     txt: "john@example.com",
 
-                    color: Colors.black87,
+                    color: AppColors.darkText,
                     fontWeight: FontWeight.w600,
                   ),
                   const SizedBox(width: 6),
-                  Icon(Icons.edit_outlined, color: blueColor, size: 18),
+                  Icon(
+                    Icons.edit_outlined,
+                    color: AppColors.electricTeal,
+                    size: 18,
+                  ),
                 ],
               ),
 
@@ -112,7 +114,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 child: CustomText(
                   txt: "Verification code",
 
-                  color: blueColor,
+                  color: AppColors.electricTeal,
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
                 ),
@@ -131,12 +133,12 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   borderRadius: BorderRadius.circular(8),
                   fieldHeight: 50,
                   fieldWidth: 45,
-                  inactiveColor: blueColor.withOpacity(0.3),
-                  selectedColor: blueColor,
-                  activeColor: blueColor,
-                  activeFillColor: Colors.white,
-                  inactiveFillColor: Colors.white,
-                  selectedFillColor: Colors.white,
+                  inactiveColor: AppColors.electricTeal.withOpacity(0.3),
+                  selectedColor: AppColors.electricTeal,
+                  activeColor: AppColors.electricTeal,
+                  activeFillColor: AppColors.pureWhite,
+                  inactiveFillColor: AppColors.pureWhite,
+                  selectedFillColor: AppColors.pureWhite,
                   borderWidth: 1.5,
                 ),
                 animationDuration: const Duration(milliseconds: 200),
@@ -157,10 +159,15 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 child: CustomButton(
                   isChecked: _isOtpFilled,
                   text: "Submit",
-                  backgroundColor: blueColor,
-                  borderColor: blueColor,
-                  textColor: Colors.white,
-                  onPressed: () {},
+                  backgroundColor: AppColors.electricTeal,
+                  borderColor: AppColors.electricTeal,
+                  textColor: AppColors.pureWhite,
+                  onPressed: () {
+                     Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => CreatePasswordScreen()),
+                      );
+                  },
                 ),
               ),
               const SizedBox(height: 20),
@@ -170,7 +177,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 txt: _seconds > 0
                     ? "Resend - 00:${_seconds.toString().padLeft(2, '0')}"
                     : "Resend Code",
-                color: Colors.black54,
+                color: AppColors.mediumGray,
                 fontSize: 14,
               ),
             ],

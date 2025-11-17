@@ -145,7 +145,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   backgroundColor: AppColors.electricTeal,
                   borderColor: AppColors.electricTeal,
                   textColor: AppColors.pureWhite,
-                  onPressed: () {},
+                  onPressed: () {
+                         
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => VerificationScreen()),
+                      );
+                    
+                  },
                 ),
               ),
 

@@ -149,11 +149,21 @@ class _LoginState extends State<Login> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  CustomText(
-                    txt: "Forgot Password",
-                    color: AppColors.electricTeal,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ForgotPassword(),
+                        ),
+                      );
+                    },
+                    child: CustomText(
+                      txt: "Forgot Password",
+                      color: AppColors.electricTeal,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
                   ),
                 ],
               ),
