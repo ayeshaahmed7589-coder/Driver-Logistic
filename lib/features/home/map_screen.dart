@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 
+import '../../constants/colors.dart';
 import '../../export.dart';
 
 class MapScreen extends StatefulWidget {
@@ -15,7 +16,7 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const Color blueColor = Color(0xFF004DEB);
+    const Color blueColor = AppColors.electricTeal;
     return Scaffold(
       body: Stack(
         children: [
@@ -52,7 +53,10 @@ class _MapScreenState extends State<MapScreen> {
                   ],
                 ),
                 padding: EdgeInsets.all(8),
-                child: Icon(Icons.arrow_back_ios_new, color: Colors.black),
+                child: Icon(
+                  Icons.arrow_back_ios_new,
+                  color: AppColors.darkText,
+                ),
               ),
             ),
           ),
@@ -91,7 +95,7 @@ class _MapScreenState extends State<MapScreen> {
                               "No 2. Balonny Close, Allen Avenue",
                               style: TextStyle(
                                 fontSize: 16,
-                                color: Colors.grey[700],
+                                color: AppColors.darkGray,
                               ),
                             ),
                           ],
@@ -101,7 +105,7 @@ class _MapScreenState extends State<MapScreen> {
                           text: "Package packed Up",
                           backgroundColor: blueColor,
                           borderColor: blueColor,
-                          textColor: Colors.white,
+                          textColor: AppColors.pureWhite,
                           onPressed: () {},
                           // disables tap when false
                         ),

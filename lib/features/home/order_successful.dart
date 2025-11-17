@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../constants/colors.dart';
+
 class OrderSuccessful extends StatefulWidget {
   const OrderSuccessful({super.key});
 
@@ -11,9 +13,8 @@ class OrderSuccessful extends StatefulWidget {
 class _OrderSuccessfulState extends State<OrderSuccessful> {
   @override
   Widget build(BuildContext context) {
-    const Color blueColor = Color(0xFF004DEB);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.lightGrayBackground,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -41,7 +42,7 @@ class _OrderSuccessfulState extends State<OrderSuccessful> {
               style: TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: 25,
-                color: Colors.black87,
+                color: AppColors.darkText,
               ),
             ),
             SizedBox(height: 10),
@@ -50,14 +51,14 @@ class _OrderSuccessfulState extends State<OrderSuccessful> {
               children: [
                 Text(
                   "Your Order ",
-                  style: TextStyle(fontSize: 17, color: Colors.grey.shade800),
+                  style: TextStyle(fontSize: 17, color: AppColors.darkGray),
                 ),
                 Text(
                   "Wo# 004-00-1209",
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
                     fontSize: 17,
-                    color: blueColor,
+                    color: AppColors.electricTeal,
                   ),
                 ),
               ],
@@ -67,14 +68,14 @@ class _OrderSuccessfulState extends State<OrderSuccessful> {
               children: [
                 Text(
                   "has been Scheduled for ",
-                  style: TextStyle(fontSize: 17, color: Colors.grey.shade800),
+                  style: TextStyle(fontSize: 17, color: AppColors.darkGray),
                 ),
                 Text(
                   "20-11-2022.",
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
                     fontSize: 17,
-                    color: blueColor,
+                    color: AppColors.electricTeal,
                   ),
                 ),
               ],

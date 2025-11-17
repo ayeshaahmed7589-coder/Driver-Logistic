@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 
+import '../../constants/colors.dart';
+
 class SummaryScreen extends StatelessWidget {
   const SummaryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF3F5FC),
+      backgroundColor: AppColors.lightGrayBackground,
 
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: const Color(0xff2C64E3),
+        backgroundColor: AppColors.electricTeal,
         centerTitle: true,
         title: const Text(
           "Summary",
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.pureWhite,
             fontSize: 18,
             fontWeight: FontWeight.w600,
           ),
@@ -30,11 +32,11 @@ class SummaryScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.pureWhite,
                 borderRadius: BorderRadius.circular(14),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.15),
+                    color: AppColors.lightBorder,
                     blurRadius: 8,
                     offset: const Offset(0, 3),
                   ),
@@ -65,13 +67,13 @@ class SummaryScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
-                          color: Colors.black87,
+                          color: AppColors.darkText,
                         ),
                       ),
                       Text(
                         "13",
                         style: TextStyle(
-                          color: Color(0xff2C64E3),
+                          color: AppColors.electricTeal,
                           fontWeight: FontWeight.w700,
                           fontSize: 15,
                         ),
@@ -88,11 +90,11 @@ class SummaryScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.pureWhite,
                 borderRadius: BorderRadius.circular(14),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.15),
+                    color: AppColors.lightBorder,
                     blurRadius: 8,
                     offset: const Offset(0, 3),
                   ),
@@ -128,7 +130,7 @@ class SummaryScreen extends StatelessWidget {
           style: const TextStyle(
             fontSize: 22,
             fontWeight: FontWeight.bold,
-            color: Colors.black87,
+            color: AppColors.darkText,
           ),
         ),
         const SizedBox(height: 4),
@@ -136,7 +138,7 @@ class SummaryScreen extends StatelessWidget {
           label,
           style: const TextStyle(
             fontSize: 13,
-            color: Colors.black54,
+            color: AppColors.darkText,
           ),
         )
       ],
@@ -145,9 +147,9 @@ class SummaryScreen extends StatelessWidget {
 
   Widget _verticalDivider() {
     return Container(
-      width: 1,
-      height: 28,
-      color: Colors.grey.shade300,
+      width: 2,
+      height: 32,
+      color: AppColors.electricTeal,
     );
   }
 
@@ -162,7 +164,7 @@ class SummaryScreen extends StatelessWidget {
             style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w600,
-              color: Colors.black87,
+              color: AppColors.darkText,
             ),
           ),
           Text(
@@ -170,7 +172,7 @@ class SummaryScreen extends StatelessWidget {
             style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w700,
-              color: Color(0xff2C64E3),
+              color: AppColors.electricTeal,
             ),
           ),
         ],
@@ -180,8 +182,8 @@ class SummaryScreen extends StatelessWidget {
 
   Widget _divider() {
     return Divider(
-      color: Colors.grey.shade300,
-      thickness: 1,
+      color: AppColors.subtleGray,
+      thickness: 2,
       height: 4,
     );
   }

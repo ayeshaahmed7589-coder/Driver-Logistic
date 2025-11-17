@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../constants/colors.dart';
+
 class RegisterSuccessful extends StatefulWidget {
   const RegisterSuccessful({super.key});
 
@@ -12,7 +14,7 @@ class _RegisterSuccessfulState extends State<RegisterSuccessful> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.lightGrayBackground,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center, // vertical center
@@ -36,7 +38,7 @@ class _RegisterSuccessfulState extends State<RegisterSuccessful> {
               style: TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: 25,
-                color: Colors.black87,
+                color: AppColors.darkText,
               ),
               textAlign: TextAlign.center,
             ),
@@ -45,7 +47,7 @@ class _RegisterSuccessfulState extends State<RegisterSuccessful> {
               style: TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: 25,
-                color: Colors.black87,
+                color: AppColors.darkText,
               ),
               textAlign: TextAlign.center,
             ),
@@ -57,7 +59,7 @@ class _RegisterSuccessfulState extends State<RegisterSuccessful> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
             child:  Text(
               "Your account has been successfully created.",
-              style: TextStyle(fontSize: 17, color: Colors.grey.shade800),
+              style: TextStyle(fontSize: 17, color: AppColors.darkGray),
               textAlign: TextAlign.center,
             ),),
 
@@ -68,7 +70,7 @@ class _RegisterSuccessfulState extends State<RegisterSuccessful> {
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Text(
                 "After documents approval you can start your Workorders.",
-                style: TextStyle(fontSize: 17, color: Colors.grey.shade800),
+                style: TextStyle(fontSize: 17, color: AppColors.darkGray),
                 textAlign: TextAlign.center,
               ),
             ),

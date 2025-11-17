@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logisticdriverapp/features/home/conform_order_successfull.dart';
 
+import '../../constants/colors.dart';
 import '../../export.dart';
 
 class EnterOtpFinalScreen extends StatefulWidget {
@@ -24,9 +25,9 @@ class _EnterOtpFinalScreenState extends State<EnterOtpFinalScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const Color blueColor = Color(0xFF004DEB);
+    const Color blueColor = AppColors.electricTeal;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.lightGrayBackground,
       appBar: AppBar(
         title: const Text(
           "Enter OTP",
@@ -43,7 +44,7 @@ class _EnterOtpFinalScreenState extends State<EnterOtpFinalScreen> {
           icon: Icon(Icons.arrow_back_ios, size: 18),
         ),
         backgroundColor: blueColor,
-        foregroundColor: Colors.white,
+        foregroundColor: AppColors.pureWhite,
       ),
       body: Stack(
         children: [
@@ -58,7 +59,7 @@ class _EnterOtpFinalScreenState extends State<EnterOtpFinalScreen> {
                       SizedBox(
                         width: double.infinity, // FULL WIDTH
                         child: Card(
-                          color: Colors.white,
+                          color: AppColors.pureWhite,
                           elevation: 4,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -106,12 +107,12 @@ class _EnterOtpFinalScreenState extends State<EnterOtpFinalScreen> {
                           margin: const EdgeInsets.only(bottom: 12),
                           padding: const EdgeInsets.all(25),
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: AppColors.pureWhite,
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(color: Colors.grey.shade300),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.grey.shade400,
+                                color: AppColors.lightBorder,
                                 blurRadius: 6,
                                 spreadRadius: 1,
                                 offset: const Offset(0, 2),
@@ -131,7 +132,7 @@ class _EnterOtpFinalScreenState extends State<EnterOtpFinalScreen> {
                                     borderRadius: BorderRadius.circular(5),
                                     color: selected[i]
                                         ? blueColor
-                                        : Colors.white,
+                                        : AppColors.pureWhite,
                                     border: Border.all(
                                       color: blueColor,
                                       width: 2,
@@ -141,7 +142,7 @@ class _EnterOtpFinalScreenState extends State<EnterOtpFinalScreen> {
                                       ? const Icon(
                                           Icons.check,
                                           size: 18,
-                                          color: Colors.white,
+                                          color: AppColors.pureWhite,
                                         )
                                       : null,
                                 ),
@@ -166,7 +167,7 @@ class _EnterOtpFinalScreenState extends State<EnterOtpFinalScreen> {
                           text: "Enter OTP",
                           backgroundColor: blueColor,
                           borderColor: blueColor,
-                          textColor: Colors.white,
+                          textColor: AppColors.pureWhite,
                           onPressed: () {
                             setState(() => showConfirmDropdown = true);
                           },
@@ -195,7 +196,7 @@ class _EnterOtpFinalScreenState extends State<EnterOtpFinalScreen> {
               child: Container(
                 width: double.infinity,
                 height: double.infinity,
-                color: Colors.black.withOpacity(0.65),
+                color: AppColors.mediumGray,
               ),
             ),
 
@@ -218,16 +219,16 @@ class _EnterOtpFinalScreenState extends State<EnterOtpFinalScreen> {
 
   // DROPDOWN WIDGET
   Widget confirmOrderDropdown() {
-    const Color blueColor = Color(0xFF004DEB);
+    const Color blueColor = AppColors.electricTeal;
     return Container(
       height: 500,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.pureWhite,
         borderRadius: BorderRadius.vertical(top: Radius.circular(22)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black26,
+            color: AppColors.mediumGray,
             blurRadius: 10,
             offset: Offset(0, -4),
           ),
@@ -264,7 +265,7 @@ class _EnterOtpFinalScreenState extends State<EnterOtpFinalScreen> {
                 height: 55,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.grey.shade400),
+                  border: Border.all(color: AppColors.electricTeal),
                 ),
                 child: TextField(
                   controller: otp[i],
@@ -286,7 +287,7 @@ class _EnterOtpFinalScreenState extends State<EnterOtpFinalScreen> {
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.grey.shade400),
+              border: Border.all(color: AppColors.electricTeal),
             ),
             child: const Center(child: Text("Click to upload Picture")),
           ),
@@ -310,9 +311,9 @@ class _EnterOtpFinalScreenState extends State<EnterOtpFinalScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 50),
             child: CustomButton(
               text: "Submit",
-              backgroundColor: isUndelivered ? blueColor : Colors.white,
+              backgroundColor: isUndelivered ? blueColor : AppColors.pureWhite,
               borderColor: isUndelivered ? blueColor : blueColor,
-              textColor: isUndelivered ? Colors.white : blueColor,
+              textColor: isUndelivered ? AppColors.pureWhite : blueColor,
               onPressed: isUndelivered
                   ? () {
                       Navigator.push(
@@ -332,12 +333,12 @@ class _EnterOtpFinalScreenState extends State<EnterOtpFinalScreen> {
 
   // YOUR CUSTOM SWITCH
   Widget customToggleSwitch() {
-    const Color blueColor = Color(0xFF004DEB);
+    const Color blueColor = AppColors.electricTeal;
     return Container(
       width: 90,
       height: 30,
       decoration: BoxDecoration(
-        color: Colors.grey.shade300,
+        color: AppColors.lightBorder,
         borderRadius: BorderRadius.circular(30),
       ),
       child: Row(
@@ -348,7 +349,7 @@ class _EnterOtpFinalScreenState extends State<EnterOtpFinalScreen> {
               child: AnimatedContainer(
                 duration: Duration(milliseconds: 250),
                 decoration: BoxDecoration(
-                  color: !isUndelivered ? blueColor : Colors.grey.shade300,
+                  color: !isUndelivered ? blueColor : AppColors.pureWhite,
                   borderRadius: BorderRadius.circular(30),
                 ),
                 alignment: Alignment.center,

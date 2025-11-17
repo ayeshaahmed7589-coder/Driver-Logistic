@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:logisticdriverapp/constants/colors.dart';
 
 import '../../export.dart';
+import '../bottom_navbar/bottom_navbar_screen.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -180,11 +181,20 @@ class _LoginState extends State<Login> {
                       : inactiveColor,
                   borderColor: AppColors.electricTeal,
                   textColor: Colors.white,
-                  onPressed: _isFormFilled
-                      ? () {
-                          debugPrint("Sign In pressed");
+                  onPressed: 
+                  // _isFormFilled
+                      // ? 
+                      () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const TripsBottomNavBarScreen(
+                                initialIndex: 0,
+                              ),
+                            ),
+                          );
                         }
-                      : null,
+                      // : null,
                 ),
               ),
 

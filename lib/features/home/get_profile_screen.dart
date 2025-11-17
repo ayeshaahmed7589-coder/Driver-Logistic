@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:logisticdriverapp/constants/gap.dart';
 
+import '../../constants/colors.dart';
+
 class GetProfileScreen extends StatelessWidget {
   const GetProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final Color blueColor = const Color(0xFF345CFF);
+    final Color blueColor = AppColors.electricTeal;
     // Screen height ka hisaab lagana zaroori hai is layout ke liye
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      // backgroundColor: primaryBlue,
+       backgroundColor: AppColors.lightGrayBackground,
       appBar: AppBar(
         title: const Text(
           'Profile',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: TextStyle(color: AppColors.pureWhite, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         backgroundColor: blueColor,
@@ -23,7 +25,7 @@ class GetProfileScreen extends StatelessWidget {
         actions: const [
           Padding(
             padding: EdgeInsets.only(right: 15.0),
-            child: Icon(Icons.logout, color: Colors.white, size: 28),
+            child: Icon(Icons.logout, color: AppColors.pureWhite, size: 28),
           ),
         ],
       ),
@@ -49,12 +51,12 @@ class GetProfileScreen extends StatelessWidget {
                   right: 0,
                   child: Column(
                     children: [
-                      _buildProfileImage(blueColor),
+                      _buildProfileImage(AppColors.electricTeal),
                       const SizedBox(height: 15),
                       const Text(
                         'John Doe',
                         style: TextStyle(
-                          color: Colors.black,
+                          color: AppColors.darkText,
                           fontSize: 24,
                           fontWeight: FontWeight.w600,
                         ),
@@ -63,7 +65,7 @@ class GetProfileScreen extends StatelessWidget {
                         width: 300,
                         margin: const EdgeInsets.only(top: 8),
                         height: 1,
-                        color: Colors.blue,
+                        color: AppColors.electricTeal,
                       ),
                     ],
                   ),
@@ -85,16 +87,16 @@ class GetProfileScreen extends StatelessWidget {
           radius: 60,
           // Yahan apni image ka path dena hoga
           backgroundImage: AssetImage('assets/profile_pic.png'),
-          backgroundColor: Colors.blue,
+          backgroundColor: AppColors.electricTeal,
         ),
         Container(
           padding: const EdgeInsets.all(5),
           decoration: BoxDecoration(
             color: primaryBlue,
             shape: BoxShape.circle,
-            border: Border.all(color: Colors.white, width: 2),
+            border: Border.all(color: AppColors.pureWhite, width: 2),
           ),
-          child: const Icon(Icons.edit, color: Colors.white, size: 18),
+          child: const Icon(Icons.edit, color: AppColors.pureWhite, size: 18),
         ),
       ],
     );
@@ -106,7 +108,7 @@ class GetProfileScreen extends StatelessWidget {
       width: double.infinity,
       // Card ka top rounded corner yahan define kiya
       decoration: const BoxDecoration(
-        color: Colors.white,
+        color: AppColors.pureWhite,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(30),
           topRight: Radius.circular(30),
@@ -129,7 +131,7 @@ class GetProfileScreen extends StatelessWidget {
           const Text(
             'Personal Info',
             style: TextStyle(
-              color: Color(0xFF283593), 
+              color: AppColors.electricTeal, 
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
@@ -174,8 +176,8 @@ class GetProfileScreen extends StatelessWidget {
     required String label,
     required String value,
     required bool showVerification,
-    Color labelColor = Colors.grey,
-    Color valueColor = const Color(0xFF283593),
+    Color labelColor = AppColors.mediumGray,
+    Color valueColor = AppColors.darkText,
   }) {
     // ... (same implementation as before)
     return Column(

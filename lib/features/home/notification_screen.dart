@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../common_widgets/custom_button.dart';
+import '../../constants/colors.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -32,9 +33,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const Color blueColor = Color(0xFF004DEB);
+    const Color blueColor = AppColors.electricTeal;
     return Scaffold(
-      backgroundColor: const Color(0xffF5F7FB),
+      backgroundColor: AppColors.lightGrayBackground,
       appBar: AppBar(
         backgroundColor: blueColor,
         elevation: 0,
@@ -42,13 +43,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
         title: const Text(
           "Notifications",
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.pureWhite,
             fontSize: 18,
             fontWeight: FontWeight.w600,
           ),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+          icon: const Icon(Icons.arrow_back_ios, color: AppColors.pureWhite),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -62,7 +63,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
   // 📌 Empty State UI
   // --------------------------
   Widget _emptyStateUI() {
-    const Color blueColor = Color(0xFF004DEB);
+    const Color blueColor = AppColors.electricTeal;
     return Column(
       children: [
         const SizedBox(height: 40),
@@ -73,14 +74,14 @@ class _NotificationScreenState extends State<NotificationScreen> {
           style: TextStyle(
             fontSize: 28,
             fontWeight: FontWeight.w600,
-            color: Colors.black,
+            color: AppColors.darkText,
           ),
         ),
         const SizedBox(height: 12),
         const Text(
           "When you have notification, you will see\n them here",
           textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.black, fontSize: 17),
+          style: TextStyle(color: AppColors.darkText, fontSize: 17),
         ),
         const SizedBox(height: 30),
         Padding(
@@ -89,7 +90,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
             text: "Refresh",
             backgroundColor: blueColor,
             borderColor: blueColor,
-            textColor: Colors.white,
+            textColor: AppColors.pureWhite,
             onPressed: () {
               setState(() {
                 hasNotifications = true;
@@ -119,7 +120,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 child: const Text(
                   "Mark all as read",
                   style: TextStyle(
-                    color: Color(0xff2C64E3),
+                    color: AppColors.darkText,
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
                   ),
@@ -130,7 +131,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 child: const Text(
                   "Clear All",
                   style: TextStyle(
-                    color: Color(0xff2C64E3),
+                    color: AppColors.darkText,
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
                   ),
@@ -149,11 +150,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 return Container(
                   margin: const EdgeInsets.only(bottom: 16),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppColors.pureWhite,
                     borderRadius: BorderRadius.circular(14),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.15),
+                        color: AppColors.lightBorder,
                         blurRadius: 8,
                         offset: const Offset(0, 3),
                       ),
@@ -165,10 +166,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     children: [
                       // LEFT BLUE LINE (FULL HEIGHT)
                       Container(
-                        height: 70,
+                        height: 76,
                         width: 6,
                         decoration: const BoxDecoration(
-                          color: Color(0xff2C64E3),
+                          color: AppColors.electricTeal,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(14),
                             bottomLeft: Radius.circular(14),
@@ -205,7 +206,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   Text(
                                     item["time"],
                                     style: TextStyle(
-                                      color: Colors.grey.shade600,
+                                      color: AppColors.darkText,
                                       fontSize: 12,
                                     ),
                                   ),
@@ -219,7 +220,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                 item["subtitle"],
                                 style: const TextStyle(
                                   fontSize: 16,
-                                  color: Colors.black,
+                                  color: AppColors.darkText,
                                 ),
                                 overflow: TextOverflow.ellipsis,
                               ),
