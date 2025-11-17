@@ -32,7 +32,8 @@ class MyApp extends StatelessWidget {
           systemNavigationBarColor: Colors.white, // Navigation bar color
           systemNavigationBarIconBrightness: Brightness.dark,
         ),
-        child: TripsBottomNavBarScreen(initialIndex: 0),
+        child:Login(),
+        //  TripsBottomNavBarScreen(initialIndex: 0),
       ),
       // home: TripsBottomNavBarScreen(initialIndex: 0),
       //  routerConfig: router,

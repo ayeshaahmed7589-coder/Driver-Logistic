@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logisticdriverapp/constants/colors.dart';
 
 import '../../export.dart';
 
@@ -15,8 +16,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController emailController = TextEditingController();
   bool isChecked = false;
 
-  final Color blueColor = const Color(0xFF345CFF);
-
   @override
   void dispose() {
     _focusNode.dispose();
@@ -27,7 +26,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F9FD),
+      backgroundColor: AppColors.lightGrayBackground,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
@@ -35,9 +34,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "koovs",
+                "DROVVI",
                 style: TextStyle(
-                  color: blueColor,
+                  color: AppColors.electricTeal,
                   fontSize: 50,
                   fontWeight: FontWeight.bold,
                 ),
@@ -48,13 +47,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: blueColor,
+                  color: AppColors.electricTeal,
                 ),
               ),
               const SizedBox(height: 10),
               const Text(
                 "Please enter your Email ID to Sign Up.",
-                style: TextStyle(color: Colors.black54, fontSize: 14),
+                style: TextStyle(color: AppColors.mediumGray, fontSize: 14),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 60),
@@ -65,9 +64,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 labelText: "Email ID",
                 hintText: "Email ID",
                 prefixIcon: Icons.email_outlined,
-                iconColor: blueColor,
-                borderColor: blueColor,
-                textColor: Colors.black87,
+                iconColor: AppColors.electricTeal,
+                borderColor: AppColors.electricTeal,
+                textColor: AppColors.mediumGray,
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -89,8 +88,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     value: isChecked,
                     onChanged: (val) =>
                         setState(() => isChecked = val ?? false),
-                    activeColor: blueColor,
-                    side: BorderSide(color: blueColor, width: 2),
+                    activeColor: AppColors.electricTeal,
+                    side: BorderSide(color: AppColors.electricTeal, width: 2),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(4),
                     ),
@@ -101,24 +100,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       children: [
                         const Text(
                           "By continuing, I confirm that I have read the ",
-                          style: TextStyle(color: Colors.black54, fontSize: 13),
+                          style: TextStyle(
+                            color: AppColors.mediumGray,
+                            fontSize: 13,
+                          ),
                         ),
                         Text(
                           "Terms of Use",
                           style: TextStyle(
-                            color: blueColor,
+                            color: AppColors.electricTeal,
                             fontWeight: FontWeight.w600,
                             fontSize: 13,
                           ),
                         ),
                         const Text(
                           " and ",
-                          style: TextStyle(color: Colors.black54, fontSize: 13),
+                          style: TextStyle(
+                            color: AppColors.mediumGray,
+                            fontSize: 13,
+                          ),
                         ),
                         Text(
                           "Privacy Policy",
                           style: TextStyle(
-                            color: blueColor,
+                            color: AppColors.electricTeal,
                             fontWeight: FontWeight.w600,
                             fontSize: 13,
                           ),
@@ -137,9 +142,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: CustomButton(
                   isChecked: isChecked,
                   text: "Sign Up",
-                  backgroundColor: blueColor,
-                  borderColor: blueColor,
-                  textColor: Colors.white,
+                  backgroundColor: AppColors.electricTeal,
+                  borderColor: AppColors.electricTeal,
+                  textColor: AppColors.pureWhite,
                   onPressed: () {},
                 ),
               ),
@@ -151,14 +156,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 children: [
                   const Text(
                     "Already a Koovs Member? ",
-                    style: TextStyle(color: Colors.black54, fontSize: 14),
+                    style: TextStyle(color: AppColors.mediumGray, fontSize: 14),
                   ),
-                  Text(
-                    "Sign In",
-                    style: TextStyle(
-                      color: blueColor,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Login()),
+                      );
+                    },
+                    child: Text(
+                      "Sign In",
+                      style: TextStyle(
+                        color: AppColors.electricTeal,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 14,
+                      ),
                     ),
                   ),
                 ],

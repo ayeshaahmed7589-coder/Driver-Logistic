@@ -1,8 +1,7 @@
-
 import 'package:flutter/material.dart';
+import 'package:logisticdriverapp/constants/colors.dart';
 
 import '../../export.dart';
-
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -50,8 +49,6 @@ class _LoginState extends State<Login> {
   // bool isChecked = false;
   bool _isOtpFilled = false;
 
-  final Color blueColor = const Color(0xFF345CFF);
-
   @override
   void dispose() {
     emailFocus.dispose();
@@ -63,9 +60,9 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    final Color inactiveColor = Colors.grey.shade400;
+    final Color inactiveColor = AppColors.mediumGray;
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F9FD),
+      backgroundColor: AppColors.lightGrayBackground,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
@@ -73,9 +70,9 @@ class _LoginState extends State<Login> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "koovs",
+                "DROVVI",
                 style: TextStyle(
-                  color: blueColor,
+                  color: AppColors.electricTeal,
                   fontSize: 50,
                   fontWeight: FontWeight.bold,
                 ),
@@ -86,13 +83,13 @@ class _LoginState extends State<Login> {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: blueColor,
+                  color: AppColors.electricTeal,
                 ),
               ),
               const SizedBox(height: 10),
               const Text(
                 "Please enter your email id or password to Sign In.",
-                style: TextStyle(color: Colors.black54, fontSize: 14),
+                style: TextStyle(color: AppColors.mediumGray, fontSize: 14),
                 textAlign: TextAlign.center,
               ),
               gapH20,
@@ -103,9 +100,9 @@ class _LoginState extends State<Login> {
                 labelText: "Email ID",
                 hintText: "Email ID",
                 prefixIcon: Icons.email_outlined,
-                iconColor: blueColor,
-                borderColor: blueColor,
-                textColor: Colors.black87,
+                iconColor: AppColors.electricTeal,
+                borderColor: AppColors.electricTeal,
+                textColor: AppColors.mediumGray,
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -126,9 +123,9 @@ class _LoginState extends State<Login> {
                 labelText: "Password",
                 hintText: "Password",
                 prefixIcon: Icons.lock_outline,
-                iconColor: blueColor,
-                borderColor: blueColor,
-                textColor: Colors.black87,
+                iconColor: AppColors.electricTeal,
+                borderColor: AppColors.electricTeal,
+                textColor: AppColors.mediumGray,
                 obscureText: _obscureNewPass,
                 suffixIcon: _showNewPassEye
                     ? IconButton(
@@ -154,7 +151,7 @@ class _LoginState extends State<Login> {
                 children: [
                   CustomText(
                     txt: "Forgot Password",
-                    color: blueColor,
+                    color: AppColors.electricTeal,
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
                   ),
@@ -168,8 +165,10 @@ class _LoginState extends State<Login> {
                 child: CustomButton(
                   isChecked: _isOtpFilled,
                   text: "Sign In",
-                  backgroundColor: _isFormFilled ? blueColor : inactiveColor,
-                  borderColor: blueColor,
+                  backgroundColor: _isFormFilled
+                      ? AppColors.electricTeal
+                      : inactiveColor,
+                  borderColor: AppColors.electricTeal,
                   textColor: Colors.white,
                   onPressed: _isFormFilled
                       ? () {
@@ -186,16 +185,24 @@ class _LoginState extends State<Login> {
                 children: [
                   const Text(
                     "Don't have an account",
-                    style: TextStyle(color: Colors.black54, fontSize: 14),
+                    style: TextStyle(color: AppColors.mediumGray, fontSize: 14),
                   ),
-                  Text(
-                    "Sign Up",
-                    style: TextStyle(
-                      color: blueColor,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14,
-                      decoration: TextDecoration.underline,
-                      decorationColor: blueColor,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignUpScreen()),
+                      );
+                    },
+                    child: Text(
+                      "Sign Up",
+                      style: TextStyle(
+                        color: AppColors.electricTeal,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 14,
+                        decoration: TextDecoration.underline,
+                        decorationColor: AppColors.electricTeal,
+                      ),
                     ),
                   ),
                 ],

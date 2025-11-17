@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:logisticdriverapp/common_widgets/appbar_widget.dart';
 import 'package:logisticdriverapp/common_widgets/custom_text.dart';
-import 'package:logisticdriverapp/features/home/completed_screen.dart';
-import 'package:logisticdriverapp/features/home/future_screen.dart';
+import 'package:logisticdriverapp/constants/colors.dart';
+import 'package:logisticdriverapp/features/home/main_screens/completed_screen.dart';
+import 'package:logisticdriverapp/features/home/main_screens/future_screen.dart';
 import 'package:logisticdriverapp/features/home/order_detail_screen.dart';
 
 class CurrentScreen extends StatefulWidget {
@@ -66,7 +67,7 @@ class _CurrentScreenState extends State<CurrentScreen>
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: const Color(0xFFF3F6FA),
+      backgroundColor: AppColors.lightGrayBackground,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(screenHeight * 0.13),
         child: BuyerAppBarWidget(
@@ -93,25 +94,27 @@ class _CurrentScreenState extends State<CurrentScreen>
   }
 
   Widget _buildTripsList() {
-    final Color blueColor = const Color(0xFF345CFF);
     return ListView.builder(
       padding: const EdgeInsets.all(16),
       itemCount: trips.length,
       itemBuilder: (context, index) {
         final trip = trips[index];
         return GestureDetector(
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>OrderDetailsScreen()));
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => OrderDetailsScreen()),
+            );
           },
           child: Container(
             margin: const EdgeInsets.only(bottom: 16),
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.pureWhite,
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
+                  color: AppColors.darkText.withOpacity(0.05),
                   blurRadius: 6,
                   offset: const Offset(0, 3),
                 ),
@@ -128,14 +131,14 @@ class _CurrentScreenState extends State<CurrentScreen>
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: blueColor,
+                        color: AppColors.electricTeal,
                       ),
                     ),
                     Text(
                       "Dist: ${trip['distance']}",
                       style: const TextStyle(
                         fontSize: 16,
-                        color: Color(0xFF1A56DB),
+                        color: AppColors.electricTeal,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -144,13 +147,17 @@ class _CurrentScreenState extends State<CurrentScreen>
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    Icon(Icons.location_on_outlined, color: blueColor, size: 18),
+                    Icon(
+                      Icons.location_on_outlined,
+                      color: AppColors.electricTeal,
+                      size: 18,
+                    ),
                     const SizedBox(width: 6),
                     Expanded(
                       child: Text(
                         trip['address']!,
                         style: const TextStyle(
-                          color: Colors.black87,
+                          color: AppColors.darkText,
                           fontSize: 13,
                           fontWeight: FontWeight.bold,
                         ),
@@ -161,26 +168,40 @@ class _CurrentScreenState extends State<CurrentScreen>
                 const SizedBox(height: 6),
                 Row(
                   children: [
-                    Icon(Icons.shopping_bag_outlined, color: blueColor, size: 18),
+                    Icon(
+                      Icons.shopping_bag_outlined,
+                      color: AppColors.electricTeal,
+                      size: 18,
+                    ),
                     const SizedBox(width: 6),
                     Text(
                       trip['product']!,
-                      style: const TextStyle(color: Colors.black54, fontSize: 13),
+                      style: const TextStyle(
+                        color: AppColors.mediumGray,
+                        fontSize: 13,
+                      ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 6),
                 Row(
                   children: [
-                    Icon(Icons.attach_money, color: blueColor, size: 18),
+                    Icon(
+                      Icons.attach_money,
+                      color: AppColors.electricTeal,
+                      size: 18,
+                    ),
                     const SizedBox(width: 6),
                     Text(
                       "Price - ${trip['price']}",
-                      style: const TextStyle(color: Colors.black54, fontSize: 13),
+                      style: const TextStyle(
+                        color: AppColors.mediumGray,
+                        fontSize: 13,
+                      ),
                     ),
                   ],
                 ),
-                const Divider(height: 20),
+                const Divider(height: 20, color: AppColors.electricTeal),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -189,17 +210,17 @@ class _CurrentScreenState extends State<CurrentScreen>
                       height: 28,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        color: const Color(0xFF1A56DB),
+                        color: AppColors.electricTeal,
                         borderRadius: BorderRadius.circular(2),
                       ),
                       child: CustomText(
                         txt: trip['workOrder']!,
                         fontSize: 13,
-                        color: Colors.white,
+                        color: AppColors.pureWhite,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-          
+
                     // ElevatedButton(
                     //   style: ElevatedButton.styleFrom(
                     //     backgroundColor: const Color(0xFF1A56DB),
@@ -222,13 +243,13 @@ class _CurrentScreenState extends State<CurrentScreen>
                       height: 35,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        color: const Color(0xFF1A56DB),
+                        color: AppColors.electricTeal,
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
                         trip['index']!,
                         style: const TextStyle(
-                          color: Colors.white,
+                          color: AppColors.pureWhite,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),

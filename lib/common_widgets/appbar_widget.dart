@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logisticdriverapp/constants/colors.dart';
 import 'package:logisticdriverapp/export.dart';
 import 'package:logisticdriverapp/features/home/notification_screen.dart';
 
@@ -20,12 +21,12 @@ class BuyerAppBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
-        statusBarColor: Color(0xFF1A56DB),
+        // statusBarColor: Color(0xFF1A56DB),
         statusBarIconBrightness: Brightness.light,
         statusBarBrightness: Brightness.dark,
       ),
       child: AppBar(
-        backgroundColor: const Color(0xFF1A56DB),
+        backgroundColor: AppColors.electricTeal,
         toolbarHeight: 200,
         elevation: 0,
         automaticallyImplyLeading: false,

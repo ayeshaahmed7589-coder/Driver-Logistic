@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:logisticdriverapp/features/home/current_screen.dart';
+import 'package:logisticdriverapp/constants/colors.dart';
+import 'package:logisticdriverapp/features/home/main_screens/current_screen.dart';
 import 'package:logisticdriverapp/features/home/get_profile_screen.dart';
 import 'package:logisticdriverapp/features/home/map_screen.dart';
 import 'package:logisticdriverapp/features/home/summary_screen.dart';
@@ -41,10 +42,11 @@ class _TripsBottomNavBarScreenState extends State<TripsBottomNavBarScreen> {
       body: Column(children: [Expanded(child: _screens[_selectedIndex])]),
       // body: SafeArea(child: _screens[_selectedIndex]),
       bottomNavigationBar: BottomNavigationBar(
+        elevation: 80,
         currentIndex: _selectedIndex,
-        backgroundColor: const Color(0xFF1A56DB),
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white70,
+        backgroundColor: AppColors.pureWhite,
+        selectedItemColor: AppColors.electricTeal,
+        unselectedItemColor: AppColors.mediumGray,
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
         items: const [

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:logisticdriverapp/common_widgets/custom_text.dart';
+import 'package:logisticdriverapp/constants/colors.dart';
 import 'package:logisticdriverapp/constants/gap.dart';
 
-class CompletedScreen extends StatelessWidget {
-  const CompletedScreen({super.key});
+class FutureScreen extends StatelessWidget {
+  const FutureScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,22 +38,25 @@ class CompletedScreen extends StatelessWidget {
       },
     ];
 
-    final Color blueColor = const Color(0xFF345CFF);
     return Column(
       children: [
-            gapH12,
+        gapH12,
 
-                Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomText(txt: "Today's Completed", fontSize: 16),
-    
-                  Icon(Icons.filter_alt_outlined, color: blueColor, size: 30),
-                ],
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CustomText(txt: "Work Order for 26/12/23", fontSize: 16),
+
+              Icon(
+                Icons.filter_alt_outlined,
+                color: AppColors.electricTeal,
+                size: 30,
               ),
-            ),
+            ],
+          ),
+        ),
         Expanded(
           child: ListView.builder(
             padding: const EdgeInsets.all(16),
@@ -65,11 +69,11 @@ class CompletedScreen extends StatelessWidget {
                     margin: const EdgeInsets.only(bottom: 16),
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                           color: AppColors.pureWhite,
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.05),
+                           color: AppColors.darkText.withOpacity(0.05),
                           blurRadius: 6,
                           offset: const Offset(0, 3),
                         ),
@@ -86,7 +90,7 @@ class CompletedScreen extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black,
+                                 color: AppColors.darkText,
                               ),
                             ),
                             Container(
@@ -94,13 +98,13 @@ class CompletedScreen extends StatelessWidget {
                               height: 25,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                color: const Color(0xFF1A56DB),
+                                color: AppColors.electricTeal,
                                 borderRadius: BorderRadius.circular(2),
                               ),
                               child: CustomText(
                                 txt: trip['workOrder']!,
                                 fontSize: 13,
-                                color: Colors.white,
+                                     color: AppColors.pureWhite,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -111,18 +115,29 @@ class CompletedScreen extends StatelessWidget {
                           children: [
                             Icon(
                               Icons.location_on_outlined,
-                              color: blueColor,
+                              color: AppColors.electricTeal,
                               size: 18,
                             ),
                             const SizedBox(width: 6),
                             Expanded(
-                              child: Text(
-                                trip['address']!,
-                                style: const TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    trip['address']!,
+                                    style: const TextStyle(
+                                       color: AppColors.mediumGray,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.directions,
+                                    color: AppColors.electricTeal,
+                                    size: 28,
+                                  ),
+                                ],
                               ),
                             ),
                           ],
@@ -132,20 +147,20 @@ class CompletedScreen extends StatelessWidget {
                           children: [
                             Icon(
                               Icons.shopping_bag_outlined,
-                              color: blueColor,
+                              color: AppColors.electricTeal,
                               size: 18,
                             ),
                             const SizedBox(width: 6),
                             Text(
                               "Product - ",
                               style: const TextStyle(
-                                color: Colors.black54,
+                                 color: AppColors.mediumGray,
                                 fontSize: 13,
                               ),
                             ),
                             CustomText(
                               txt: " ${trip['product']!}",
-                              color: blueColor,
+                              color: AppColors.electricTeal,
                               fontSize: 13,
                             ),
                           ],
@@ -153,37 +168,22 @@ class CompletedScreen extends StatelessWidget {
                         const SizedBox(height: 6),
                         Row(
                           children: [
-                            Icon(Icons.attach_money, color: blueColor, size: 18),
+                            Icon(
+                              Icons.attach_money,
+                              color: AppColors.electricTeal,
+                              size: 18,
+                            ),
                             const SizedBox(width: 6),
                             Text(
                               "Price - ",
                               style: const TextStyle(
-                                color: Colors.black54,
+                                color: AppColors.mediumGray,
                                 fontSize: 13,
                               ),
                             ),
                             CustomText(
                               txt: " ${trip['price']}",
-                              color: blueColor,
-                              fontSize: 13,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 6),
-                        Row(
-                          children: [
-                            Icon(Icons.badge_outlined, color: blueColor, size: 18),
-                            const SizedBox(width: 6),
-                            Text(
-                              "Delivered at - ",
-                              style: const TextStyle(
-                                color: Colors.black54,
-                                fontSize: 13,
-                              ),
-                            ),
-                            CustomText(
-                              txt: " ${trip['price']}",
-                              color: blueColor,
+                              color: AppColors.electricTeal,
                               fontSize: 13,
                             ),
                           ],

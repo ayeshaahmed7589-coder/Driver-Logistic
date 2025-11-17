@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:logisticdriverapp/common_widgets/custom_text.dart';
+
+import 'package:logisticdriverapp/constants/colors.dart';
 import 'package:logisticdriverapp/features/home/order_successful.dart';
-import '../../common_widgets/cuntom_textfield.dart';
-import '../../common_widgets/custom_button.dart';
+
 import '../../export.dart';
 
 class OrderDetailsScreen extends StatefulWidget {
@@ -50,10 +50,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const Color blueColor = Color(0xFF004DEB);
-
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F7FA),
+      backgroundColor: AppColors.lightGrayBackground,
       appBar: AppBar(
         title: const Text(
           "Order Details",
@@ -69,8 +67,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           },
           icon: Icon(Icons.arrow_back_ios, size: 18),
         ),
-        backgroundColor: blueColor,
-        foregroundColor: Colors.white,
+        backgroundColor: AppColors.electricTeal,
+        foregroundColor: AppColors.pureWhite,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -78,7 +76,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // --- Customer Card ---
-            buildCustomerCard(blueColor),
+            buildCustomerCard(AppColors.electricTeal),
             const SizedBox(height: 23),
 
             // --- Delivery Requests Heading ---
@@ -87,13 +85,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
 
               fontSize: 17,
               fontWeight: FontWeight.w500,
-              color: Colors.black,
+              color: AppColors.darkText,
             ),
             const SizedBox(height: 14),
 
-            buildProductCard(blueColor),
+            buildProductCard(AppColors.electricTeal),
             const SizedBox(height: 18),
-            buildProductCard(blueColor),
+            buildProductCard(AppColors.electricTeal),
             const SizedBox(height: 20),
 
             // --- Toggle Switch ---
@@ -102,7 +100,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
               children: [
                 const Text(
                   "Mark as Undelivered",
-                  style: TextStyle(fontSize: 16, color: Colors.black87),
+                  style: TextStyle(fontSize: 16, color: AppColors.mediumGray),
                 ),
 
                 Container(
@@ -122,7 +120,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                             duration: const Duration(milliseconds: 250),
                             decoration: BoxDecoration(
                               color: !isUndelivered
-                                  ? blueColor
+                                  ? AppColors.electricTeal
                                   : Colors.grey.shade300,
                               borderRadius: BorderRadius.circular(30),
                             ),
@@ -131,7 +129,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                               "OFF",
                               style: TextStyle(
                                 color: !isUndelivered
-                                    ? Colors.white
+                                    ? AppColors.pureWhite
                                     : Colors.black54,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15,
@@ -148,7 +146,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                             duration: const Duration(milliseconds: 250),
                             decoration: BoxDecoration(
                               color: isUndelivered
-                                  ? blueColor
+                                  ? AppColors.electricTeal
                                   : Colors.grey.shade300,
                               borderRadius: BorderRadius.circular(30),
                             ),
@@ -157,7 +155,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                               "ON",
                               style: TextStyle(
                                 color: isUndelivered
-                                    ? Colors.white
+                                    ? AppColors.pureWhite
                                     : Colors.black54,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15,
@@ -183,11 +181,11 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 width: double.infinity,
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.pureWhite,
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black12,
+                      color: AppColors.darkText.withOpacity(0.05),
                       blurRadius: 4,
                       offset: const Offset(0, 2),
                     ),
@@ -201,7 +199,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       style: TextStyle(
                         fontWeight: FontWeight.w900,
                         fontSize: 17,
-                        color: Colors.black87,
+                        color: AppColors.mediumGray,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -209,7 +207,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       controller: noteController,
                       maxLines: 3,
                       decoration: InputDecoration(
-                        focusColor: blueColor,
+                        focusColor: AppColors.electricTeal,
                         filled: true,
                         fillColor: Colors.grey.shade200,
                         hintText:
@@ -229,13 +227,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       labelText: "Select Next Delivery Date",
                       hintText: "Select Next Delivery Date",
                       prefixIcon: Icons.calendar_today_outlined,
-                      iconColor: blueColor,
-                      borderColor: blueColor,
-                      textColor: Colors.black87,
+                      iconColor: AppColors.electricTeal,
+                      borderColor: AppColors.electricTeal,
+                      textColor: AppColors.mediumGray,
                       keyboardType: TextInputType.datetime,
                       suffixIcon: IconButton(
                         icon: const Icon(Icons.keyboard_arrow_down_rounded),
-                        color: blueColor,
+                        color: AppColors.electricTeal,
                         onPressed: selectDate,
                       ),
                     ),
@@ -250,9 +248,15 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: CustomButton(
                 text: "Confirm",
-                backgroundColor: isUndelivered ? blueColor : Colors.white,
-                borderColor: isUndelivered ? blueColor : blueColor,
-                textColor: isUndelivered ? Colors.white : blueColor,
+                backgroundColor: isUndelivered
+                    ? AppColors.electricTeal
+                    : AppColors.pureWhite,
+                borderColor: isUndelivered
+                    ? AppColors.electricTeal
+                    : AppColors.electricTeal,
+                textColor: isUndelivered
+                    ? AppColors.pureWhite
+                    : AppColors.electricTeal,
                 onPressed: isUndelivered
                     ? () {
                         Navigator.push(
@@ -275,11 +279,11 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   Widget buildCustomerCard(Color blueColor) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.pureWhite,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black12,
+            color: AppColors.darkText.withOpacity(0.05),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -297,7 +301,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
-                  color: blueColor,
+                  color: AppColors.electricTeal,
                 ),
               ),
               Text(
@@ -305,7 +309,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w800,
-                  color: blueColor,
+                  color: AppColors.electricTeal,
                 ),
               ),
             ],
@@ -314,21 +318,29 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(Icons.location_on_outlined, color: blueColor, size: 17),
+              Icon(
+                Icons.location_on_outlined,
+                color: AppColors.electricTeal,
+                size: 17,
+              ),
               SizedBox(width: 6),
               Expanded(
                 child: Text(
                   "6391 Elgin St. Celina, Delaware 10299",
-                  style: TextStyle(fontSize: 14, color: Colors.black87),
+                  style: TextStyle(fontSize: 14, color: AppColors.mediumGray),
                 ),
               ),
-              Icon(Icons.directions, color: blueColor),
+              Icon(Icons.directions, color: AppColors.electricTeal),
             ],
           ),
           const SizedBox(height: 8),
           Row(
             children: [
-              Icon(Icons.inventory_2_outlined, color: blueColor, size: 17),
+              Icon(
+                Icons.inventory_2_outlined,
+                color: AppColors.electricTeal,
+                size: 17,
+              ),
               SizedBox(width: 6),
               Text(
                 "Product - 02",
@@ -339,7 +351,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           const SizedBox(height: 8),
           Row(
             children: [
-              Icon(Icons.attach_money, color: blueColor, size: 17),
+              Icon(Icons.attach_money, color: AppColors.electricTeal, size: 17),
               SizedBox(width: 6),
               Text(
                 "Price - \$52.01",
@@ -348,19 +360,23 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
             ],
           ),
           const SizedBox(height: 11),
-          const Divider(height: 1),
+          const Divider(height: 1, color: AppColors.electricTeal),
           const SizedBox(height: 13),
           // --- Call Button ---
           Row(
             children: [
-              Icon(Icons.phone_outlined, color: blueColor, size: 22),
+              Icon(
+                Icons.phone_outlined,
+                color: AppColors.electricTeal,
+                size: 22,
+              ),
               SizedBox(width: 6),
               Text(
                 "Call Customer",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w800,
-                  color: blueColor,
+                  color: AppColors.electricTeal,
                 ),
               ),
             ],
@@ -374,11 +390,11 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   Widget buildProductCard(Color blueColor) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.pureWhite,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black12,
+            color: AppColors.darkText.withOpacity(0.05),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -400,7 +416,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
 
                       fontSize: 17,
                       fontWeight: FontWeight.w800,
-                      color: Colors.black87,
+                      color: AppColors.darkText,
                     ),
                     ElevatedButton.icon(
                       onPressed: () {
@@ -412,10 +428,16 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         );
                       },
                       icon: const Icon(Icons.qr_code_scanner, size: 22),
-                      label: const Text("Scan", style: TextStyle(fontSize: 16)),
+                      label: const Text(
+                        "Scan",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: AppColors.pureWhite,
+                        ),
+                      ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: blueColor,
-                        foregroundColor: Colors.white,
+                        backgroundColor: AppColors.electricTeal,
+                        foregroundColor: AppColors.pureWhite,
                         padding: const EdgeInsets.symmetric(
                           horizontal: 14,
                           vertical: 8,
@@ -434,14 +456,14 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 const SizedBox(height: 4),
                 const Text(
                   "RIGO Men Jump Printed Terry Joggers",
-                  style: TextStyle(fontSize: 15, color: Colors.black),
+                  style: TextStyle(fontSize: 15, color: AppColors.darkText),
                 ),
                 const SizedBox(height: 6),
                 const Text(
                   "Qty: 01 | Price: \$52.01",
                   style: TextStyle(
                     fontSize: 15,
-                    color: Color(0xFF004DEB),
+                    color: AppColors.electricTeal,
                     fontWeight: FontWeight.w900,
                   ),
                 ),
