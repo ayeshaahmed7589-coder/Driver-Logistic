@@ -13,11 +13,15 @@ class GetProfileScreen extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-       backgroundColor: AppColors.lightGrayBackground,
+      backgroundColor: AppColors.lightGrayBackground,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text(
           'Profile',
-          style: TextStyle(color: AppColors.pureWhite, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            color: AppColors.pureWhite,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         centerTitle: true,
         backgroundColor: blueColor,
@@ -85,9 +89,8 @@ class GetProfileScreen extends StatelessWidget {
       children: [
         const CircleAvatar(
           radius: 60,
-          // Yahan apni image ka path dena hoga
           backgroundImage: AssetImage('assets/profile_pic.png'),
-          backgroundColor: AppColors.electricTeal,
+          backgroundColor: AppColors.subtleGray,
         ),
         Container(
           padding: const EdgeInsets.all(5),
@@ -117,12 +120,7 @@ class GetProfileScreen extends StatelessWidget {
           bottomRight: Radius.circular(30),
         ),
       ),
-      padding: const EdgeInsets.fromLTRB(
-        25,
-        60,
-        25,
-        50,
-      ), 
+      padding: const EdgeInsets.fromLTRB(25, 60, 25, 50),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -131,7 +129,7 @@ class GetProfileScreen extends StatelessWidget {
           const Text(
             'Personal Info',
             style: TextStyle(
-              color: AppColors.electricTeal, 
+              color: AppColors.electricTeal,
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
@@ -195,11 +193,15 @@ class GetProfileScreen extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(width: 10,),
+            SizedBox(width: 10),
             if (showVerification)
               const Row(
                 children: [
-                  Icon(Icons.check_circle_outline, color: Colors.green, size: 18),
+                  Icon(
+                    Icons.check_circle_outline,
+                    color: Colors.green,
+                    size: 18,
+                  ),
                   SizedBox(width: 4),
                   Text(
                     'Verified',

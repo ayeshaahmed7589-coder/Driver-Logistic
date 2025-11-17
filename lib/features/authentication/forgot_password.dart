@@ -46,7 +46,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   }
 
   // bool isChecked = false;
-  bool _isOtpFilled = false;
 
   @override
   void dispose() {
@@ -119,13 +118,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: CustomButton(
-                  isChecked: _isOtpFilled,
+                  isChecked: _isFormFilled,
                   text: "Submit",
                   backgroundColor: _isFormFilled
                       ? AppColors.electricTeal
                       : inactiveColor,
                   borderColor: AppColors.electricTeal,
-                  textColor: AppColors.pureWhite,
+                  textColor: AppColors.lightGrayBackground,
                   onPressed: _isFormFilled
                       ? () {
                           debugPrint("Submit");

@@ -12,6 +12,8 @@ class EnterOtpFinalScreen extends StatefulWidget {
 }
 
 class _EnterOtpFinalScreenState extends State<EnterOtpFinalScreen> {
+    TextEditingController otpController = TextEditingController();
+     bool _isOtpFilled = false;
   bool showConfirmDropdown = false;
 
   bool isUndelivered = false;
@@ -257,28 +259,58 @@ class _EnterOtpFinalScreenState extends State<EnterOtpFinalScreen> {
           const SizedBox(height: 16),
 
           // OTP BOXES
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: List.generate(6, (i) {
-              return Container(
-                width: 45,
-                height: 55,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: AppColors.electricTeal),
+             PinCodeTextField(
+                appContext: context,
+                length: 6,
+                controller: otpController,
+                obscureText: false,
+                animationType: AnimationType.fade,
+                keyboardType: TextInputType.number,
+                autoDismissKeyboard: true,
+                pinTheme: PinTheme(
+                  shape: PinCodeFieldShape.box,
+                  borderRadius: BorderRadius.circular(8),
+                  fieldHeight: 50,
+                  fieldWidth: 45,
+                  inactiveColor: AppColors.electricTeal.withOpacity(0.3),
+                  selectedColor: AppColors.electricTeal,
+                  activeColor: AppColors.electricTeal,
+                  activeFillColor: AppColors.pureWhite,
+                  inactiveFillColor: AppColors.pureWhite,
+                  selectedFillColor: AppColors.pureWhite,
+                  borderWidth: 1.5,
                 ),
-                child: TextField(
-                  controller: otp[i],
-                  maxLength: 1,
-                  textAlign: TextAlign.center,
-                  decoration: const InputDecoration(
-                    counterText: "",
-                    border: InputBorder.none,
-                  ),
-                ),
-              );
-            }),
-          ),
+                animationDuration: const Duration(milliseconds: 200),
+                enableActiveFill: true,
+                onChanged: (value) {
+                  setState(() {
+                    _isOtpFilled = value.length == 6;
+                  });
+                },
+              ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: List.generate(6, (i) {
+          //     return Container(
+          //       width: 45,
+          //       height: 55,
+          //       decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.circular(10),
+          //         border: Border.all(color: AppColors.electricTeal),
+          //       ),
+          //       child:
+          //        TextField(
+          //         controller: otp[i],
+          //         maxLength: 1,
+          //         textAlign: TextAlign.center,
+          //         decoration: const InputDecoration(
+          //           counterText: "",
+          //           border: InputBorder.none,
+          //         ),
+          //       ),
+          //     );
+          //   }),
+          // ),
 
           const SizedBox(height: 22),
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:logisticdriverapp/constants/colors.dart';
 
 import '../../export.dart';
 import '../bottom_navbar/bottom_navbar_screen.dart';
@@ -48,7 +47,6 @@ class _LoginState extends State<Login> {
   }
 
   // bool isChecked = false;
-  bool _isOtpFilled = false;
 
   @override
   void dispose() {
@@ -174,17 +172,15 @@ class _LoginState extends State<Login> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: CustomButton(
-                  isChecked: _isOtpFilled,
+                  isChecked: _isFormFilled,
                   text: "Sign In",
                   backgroundColor: _isFormFilled
                       ? AppColors.electricTeal
                       : inactiveColor,
                   borderColor: AppColors.electricTeal,
-                  textColor: Colors.white,
-                  onPressed: 
-                  // _isFormFilled
-                      // ? 
-                      () {
+                  textColor: AppColors.lightGrayBackground,
+                  onPressed: _isFormFilled
+                      ? () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -194,7 +190,7 @@ class _LoginState extends State<Login> {
                             ),
                           );
                         }
-                      // : null,
+                      : null,
                 ),
               ),
 

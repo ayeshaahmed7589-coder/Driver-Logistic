@@ -13,6 +13,7 @@ class SummaryScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: AppColors.electricTeal,
+      automaticallyImplyLeading: false,  
         centerTitle: true,
         title: const Text(
           "Summary",

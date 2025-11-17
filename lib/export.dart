@@ -21,3 +21,6 @@ export 'dart:async';
 export 'package:logisticdriverapp/features/home/main_screens/current_screen.dart';
 export 'package:logisticdriverapp/features/home/scan_barcode_scanner.dart';
 export 'package:logisticdriverapp/features/home/conform_order_screen.dart';
+
+export 'package:logisticdriverapp/constants/colors.dart';
+export 'package:logisticdriverapp/features/custom_splash/splash.dart';

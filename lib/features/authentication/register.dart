@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:logisticdriverapp/constants/colors.dart';
 
 import '../../export.dart';
 

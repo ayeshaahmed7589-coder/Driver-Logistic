@@ -25,15 +25,15 @@ class _SplashScreenState extends State<SplashScreen>
     );
 
     _animation = Tween<Offset>(
-      begin: const Offset(0, 2.5), // 👈 bottom se start
-      end: const Offset(0, 0), // 👈 center par end
+      begin: const Offset(0, 2.5),
+      end: const Offset(0, 0),
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutBack));
 
     _controller.forward();
 
     // Navigate after delay
     Future.delayed(const Duration(seconds: 2), () {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Login())) ;
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
     });
   }
 

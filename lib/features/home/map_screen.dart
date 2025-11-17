@@ -52,11 +52,11 @@ class _MapScreenState extends State<MapScreen> {
                     ),
                   ],
                 ),
-                padding: EdgeInsets.all(8),
-                child: Icon(
-                  Icons.arrow_back_ios_new,
-                  color: AppColors.darkText,
-                ),
+                // padding: EdgeInsets.all(8),
+                // child: Icon(
+                //   Icons.arrow_back_ios_new,
+                //   color: AppColors.darkText,
+                // ),
               ),
             ),
           ),
