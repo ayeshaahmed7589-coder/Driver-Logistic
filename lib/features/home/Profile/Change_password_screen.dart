@@ -2,19 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logisticdriverapp/constants/colors.dart';
 
-import '../../export.dart';
+import '../../../export.dart';
 
-class CreatePasswordScreen extends StatefulWidget {
-  const CreatePasswordScreen({Key? key}) : super(key: key);
+class ChangePasswordScreen extends StatefulWidget {
+  const ChangePasswordScreen({super.key});
 
   @override
-  State<CreatePasswordScreen> createState() => _CreatePasswordScreenState();
+  State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
 }
 
-class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
+class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
+  final currentpasswordFocus = FocusNode();
   final passwordFocus = FocusNode();
   final confrompasswordFocus = FocusNode();
 
+  final TextEditingController currentPasswordController =
+      TextEditingController();
   final TextEditingController newPasswordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
@@ -28,8 +31,16 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
   @override
   void initState() {
     super.initState();
+    currentPasswordController.addListener(_currentPasswordListener);
     newPasswordController.addListener(_newPasswordListener);
     confirmPasswordController.addListener(_confirmPasswordListener);
+  }
+
+  void _currentPasswordListener() {
+    final shouldShow = currentPasswordController.text.isNotEmpty;
+    if (shouldShow != _showNewPassEye) {
+      setState(() => _showNewPassEye = shouldShow);
+    }
   }
 
   void _newPasswordListener() {
@@ -48,10 +59,13 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
 
   @override
   void dispose() {
+    currentPasswordController.removeListener(_currentPasswordListener);
     newPasswordController.removeListener(_newPasswordListener);
     confirmPasswordController.removeListener(_confirmPasswordListener);
+    currentPasswordController.dispose();
     newPasswordController.dispose();
     confirmPasswordController.dispose();
+    currentpasswordFocus.dispose();
     passwordFocus.dispose();
     confrompasswordFocus.dispose();
     super.dispose();
@@ -61,36 +75,32 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.lightGrayBackground,
+      appBar: AppBar(
+        title: const Text(
+          "Change Password",
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        elevation: 0,
+        toolbarHeight: 45,
+        leading: IconButton(
+          onPressed: () => context.pop(),
+          icon: const Icon(Icons.arrow_back_ios_new, size: 18),
+        ),
+        backgroundColor: AppColors.electricTeal,
+        foregroundColor: AppColors.pureWhite,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(height: 20),
-
-              /// App Title
-              CustomText(
-                txt: "DROVVI",
-                color: AppColors.electricTeal,
-                fontSize: 50,
-                fontWeight: FontWeight.bold,
-              ),
-              const SizedBox(height: 40),
-
-              /// Page Heading
-              CustomText(
-                txt: "Create New Password",
-                color: AppColors.electricTeal,
-                fontSize: 25,
-                fontWeight: FontWeight.w700,
-              ),
               const SizedBox(height: 10),
 
               /// Subtitle
               CustomText(
-                txt:
-                    "Set your new password so you can Log In\nand access Resolve",
+                txt: "Change your password so you can secure\nYour Account",
                 align: TextAlign.center,
                 color: AppColors.mediumGray,
                 fontSize: 14,
@@ -98,6 +108,36 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
               ),
 
               const SizedBox(height: 35),
+
+              /// Current Password Field
+              CustomAnimatedTextField(
+                controller: currentPasswordController,
+                focusNode: currentpasswordFocus,
+                labelText: "Current Password",
+                hintText: "Current Password",
+                prefixIcon: Icons.lock_outline,
+                iconColor: AppColors.electricTeal,
+                borderColor: AppColors.electricTeal,
+                textColor: AppColors.darkText,
+                obscureText: _obscureNewPass,
+                suffixIcon: _showNewPassEye
+                    ? IconButton(
+                        icon: Icon(
+                          _obscureNewPass
+                              ? Icons.visibility_off_outlined
+                              : Icons.visibility_outlined,
+                          color: AppColors.darkText,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscureNewPass = !_obscureNewPass;
+                          });
+                        },
+                      )
+                    : null,
+              ),
+
+              const SizedBox(height: 20),
 
               /// New Password Field
               CustomAnimatedTextField(
@@ -162,13 +202,11 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: CustomButton(
-                  text: "Conform",
+                  text: "Change Password",
                   backgroundColor: AppColors.electricTeal,
                   borderColor: AppColors.electricTeal,
                   textColor: AppColors.pureWhite,
-                  onPressed: () {
-                    context.go('/login');
-                  },
+                  onPressed: () {},
                 ),
               ),
 

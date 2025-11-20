@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:logisticdriverapp/export.dart';
-
-import '../authentication/login.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -33,11 +32,8 @@ class _SplashScreenState extends State<SplashScreen>
     _controller.forward();
 
     // Navigate after delay
-    Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => Login()),
-      );
+    Future.delayed( Duration(seconds: 2), () {
+      context.go('/login');
     });
   }
 

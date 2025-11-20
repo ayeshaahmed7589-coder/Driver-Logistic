@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../export.dart';
-import '../bottom_navbar/bottom_navbar_screen.dart';
-
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -150,12 +149,7 @@ class _LoginState extends State<Login> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ForgotPassword(),
-                        ),
-                      );
+                      context.go("/forgot-password");
                     },
                     child: CustomText(
                       txt: "Forgot Password",
@@ -181,14 +175,7 @@ class _LoginState extends State<Login> {
                   textColor: AppColors.lightGrayBackground,
                   onPressed: _isFormFilled
                       ? () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => const TripsBottomNavBarScreen(
-                                initialIndex: 0,
-                              ),
-                            ),
-                          );
+                          context.go("/home");
                         }
                       : null,
                 ),
@@ -196,33 +183,33 @@ class _LoginState extends State<Login> {
 
               gapH32,
 
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Don't have an account",
-                    style: TextStyle(color: AppColors.mediumGray, fontSize: 14),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SignUpScreen()),
-                      );
-                    },
-                    child: Text(
-                      "Sign Up",
-                      style: TextStyle(
-                        color: AppColors.electricTeal,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14,
-                        decoration: TextDecoration.underline,
-                        decorationColor: AppColors.electricTeal,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              // Column(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     const Text(
+              //       "Don't have an account",
+              //       style: TextStyle(color: AppColors.mediumGray, fontSize: 14),
+              //     ),
+              //     GestureDetector(
+              //       onTap: () {
+              //         Navigator.push(
+              //           context,
+              //           MaterialPageRoute(builder: (context) => SignUpScreen()),
+              //         );
+              //       },
+              //       child: Text(
+              //         "Sign Up",
+              //         style: TextStyle(
+              //           color: AppColors.electricTeal,
+              //           fontWeight: FontWeight.w700,
+              //           fontSize: 14,
+              //           decoration: TextDecoration.underline,
+              //           decorationColor: AppColors.electricTeal,
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
             ],
           ),
         ),

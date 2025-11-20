@@ -2,7 +2,7 @@ export 'package:logisticdriverapp/features/authentication/create_password.dart';
 export 'package:logisticdriverapp/features/authentication/login.dart';
 export 'package:logisticdriverapp/features/authentication/otp.dart';
 export 'package:logisticdriverapp/features/authentication/register.dart';
-export 'package:logisticdriverapp/features/authentication/set_up_profile.dart';
+export 'package:logisticdriverapp/features/home/Profile/Edit_profile.dart';
 
 export 'dart:ui';
 export 'package:logisticdriverapp/common_widgets/cuntom_textfield.dart';

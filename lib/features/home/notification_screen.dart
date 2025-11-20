@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../common_widgets/custom_button.dart';
 import '../../constants/colors.dart';
@@ -11,7 +12,7 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
-  bool hasNotifications = false; // 🔹 Toggle UI state
+  bool hasNotifications = false; // Toggle UI state
 
   List<Map<String, dynamic>> notifications = [
     {
@@ -49,18 +50,17 @@ class _NotificationScreenState extends State<NotificationScreen> {
           ),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.pureWhite),
-          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back_ios_new, color: AppColors.pureWhite),
+          onPressed: () => context.pop(),
         ),
       ),
 
-      // 🔥 BODY BASED ON STATE
       body: hasNotifications ? _notificationListUI() : _emptyStateUI(),
     );
   }
 
   // --------------------------
-  // 📌 Empty State UI
+  // Empty State UI
   // --------------------------
   Widget _emptyStateUI() {
     const Color blueColor = AppColors.electricTeal;
@@ -96,7 +96,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 hasNotifications = true;
               });
             },
-            // disables tap when false
           ),
         ),
       ],
@@ -104,14 +103,14 @@ class _NotificationScreenState extends State<NotificationScreen> {
   }
 
   // --------------------------
-  // 📌 Notification List UI
+  // Notification List UI
   // --------------------------
   Widget _notificationListUI() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: Column(
         children: [
-          // TOP ACTION ROW
+          // Top Action Row
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -140,7 +139,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
             ],
           ),
 
-          // LIST
+          // Notifications List
           Expanded(
             child: ListView.builder(
               itemCount: notifications.length,
@@ -164,7 +163,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // LEFT BLUE LINE (FULL HEIGHT)
+                      // Left Blue Line
                       Container(
                         height: 76,
                         width: 6,
@@ -177,7 +176,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         ),
                       ),
 
-                      // CONTENT
+                      // Content
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
@@ -187,7 +186,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // TITLE + TIME
+                              // Title + Time
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -215,7 +214,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
                               const SizedBox(height: 4),
 
-                              // SUBTITLE
+                              // Subtitle
                               Text(
                                 item["subtitle"],
                                 style: const TextStyle(

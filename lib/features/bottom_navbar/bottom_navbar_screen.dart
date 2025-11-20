@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:logisticdriverapp/constants/colors.dart';
+import 'package:logisticdriverapp/features/home/Profile/earning_screen.dart';
 import 'package:logisticdriverapp/features/home/main_screens/current_screen.dart';
-import 'package:logisticdriverapp/features/home/get_profile_screen.dart';
-import 'package:logisticdriverapp/features/home/map_screen.dart';
-import 'package:logisticdriverapp/features/home/summary_screen.dart';
+import 'package:logisticdriverapp/features/home/Profile/get_profile_screen.dart';
+import 'package:logisticdriverapp/features/home/order_detail_screen.dart';
 
 class TripsBottomNavBarScreen extends StatefulWidget {
   final int initialIndex;
@@ -19,8 +19,8 @@ class _TripsBottomNavBarScreenState extends State<TripsBottomNavBarScreen> {
 
   final List<Widget> _screens = const [
     CurrentScreen(), 
-    MapScreen(),
-    SummaryScreen(),
+    OrderDetailsScreen(),
+    EarningsScreen(),
     GetProfileScreen(),
   ];
 
@@ -55,12 +55,12 @@ class _TripsBottomNavBarScreenState extends State<TripsBottomNavBarScreen> {
             label: "Home",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.summarize_outlined),
-            label: "Tracking",
+            icon: Icon(Icons.inventory_2_outlined),
+            label: "Order Details",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            label: "Summary",
+            icon: Icon(Icons.monetization_on_outlined),
+            label: "Earning",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),

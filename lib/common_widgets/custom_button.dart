@@ -46,7 +46,7 @@ class CustomButton extends StatelessWidget {
           text,
           style: TextStyle(
             color: active ? textColor : borderColor,
-            fontSize: 16,
+            fontSize: 15,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -54,41 +54,3 @@ class CustomButton extends StatelessWidget {
     );
   }
 }
-
-
-
-
-    // Sign Up Button
-              // SizedBox(
-              //   width: double.infinity,
-              //   height: 52,
-              //   child: ElevatedButton(
-              //     onPressed: () {
-              //       if (isChecked) {}
-              //     },
-              //     style: ButtonStyle(
-              //       backgroundColor: MaterialStateProperty.all(
-              //         isChecked ? blueColor : Colors.white,
-              //       ),
-              //       shape: MaterialStateProperty.all(
-              //         RoundedRectangleBorder(
-              //           borderRadius: BorderRadius.circular(25),
-              //           side: BorderSide(color: blueColor, width: 2),
-              //         ),
-              //       ),
-              //       elevation: MaterialStateProperty.all(0),
-              //       overlayColor: MaterialStateProperty.all(
-              //         blueColor.withOpacity(0.1),
-              //       ),
-              //     ),
-              //     child: Text(
-              //       "Sign Up",
-              //       style: TextStyle(
-              //         color: isChecked ? Colors.white : blueColor,
-              //         fontSize: 16,
-              //         fontWeight: FontWeight.bold,
-              //       ),
-              //     ),
-              //   ),
-              // ),
-          

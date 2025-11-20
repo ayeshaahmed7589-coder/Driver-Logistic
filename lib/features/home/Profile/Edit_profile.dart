@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:logisticdriverapp/constants/colors.dart';
-import 'package:logisticdriverapp/features/authentication/register_successful.dart';
+import 'package:go_router/go_router.dart';
+import '../../../export.dart';
+export '../../../common_widgets/cuntom_textfield.dart';
+export '../../../common_widgets/custom_button.dart';
 
-import '../../export.dart';
-export '../../common_widgets/cuntom_textfield.dart';
-export '../../common_widgets/custom_button.dart';
-
-class SetUpProfile extends StatefulWidget {
-  const SetUpProfile({super.key});
+class EditProfileScreen extends StatefulWidget {
+  const EditProfileScreen({super.key});
 
   @override
-  State<SetUpProfile> createState() => _SetUpProfileState();
+  State<EditProfileScreen> createState() => _EditProfileScreenState();
 }
 
-class _SetUpProfileState extends State<SetUpProfile> {
-  final TextEditingController firstNameController = TextEditingController();
-  final TextEditingController lastNameController = TextEditingController();
-  final TextEditingController mobileController = TextEditingController();
-  final TextEditingController dobController = TextEditingController();
+class _EditProfileScreenState extends State<EditProfileScreen> {
+  final TextEditingController carnumberController = TextEditingController();
+  final TextEditingController LicenseController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
 
-  final FocusNode firstNameFocus = FocusNode();
-  final FocusNode lastNameFocus = FocusNode();
-  final FocusNode mobileFocus = FocusNode();
-  final FocusNode dobFocus = FocusNode();
+  final FocusNode carnumberFocus = FocusNode();
+  final FocusNode LicenseFocus = FocusNode();
+  final FocusNode emailFocus = FocusNode();
+  final FocusNode phoneFocus = FocusNode();
 
   bool isChecked = false;
   XFile? profileImage;
@@ -32,10 +30,10 @@ class _SetUpProfileState extends State<SetUpProfile> {
   void checkFields() {
     setState(() {
       isChecked =
-          firstNameController.text.isNotEmpty &&
-          lastNameController.text.isNotEmpty &&
-          mobileController.text.isNotEmpty &&
-          dobController.text.isNotEmpty;
+          carnumberController.text.isNotEmpty &&
+          LicenseController.text.isNotEmpty &&
+          emailController.text.isNotEmpty &&
+          phoneController.text.isNotEmpty;
     });
   }
 
@@ -48,41 +46,25 @@ class _SetUpProfileState extends State<SetUpProfile> {
     }
   }
 
-  Future<void> selectDate() async {
-    DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-    );
-
-    if (pickedDate != null) {
-      dobController.text =
-          "${pickedDate.day.toString().padLeft(2, '0')}/"
-          "${pickedDate.month.toString().padLeft(2, '0')}/"
-          "${pickedDate.year}";
-    }
-  }
-
   @override
   void initState() {
     super.initState();
-    firstNameController.addListener(checkFields);
-    lastNameController.addListener(checkFields);
-    mobileController.addListener(checkFields);
-    dobController.addListener(checkFields);
+    carnumberController.addListener(checkFields);
+    LicenseController.addListener(checkFields);
+    emailController.addListener(checkFields);
+    phoneController.addListener(checkFields);
   }
 
   @override
   void dispose() {
-    firstNameController.dispose();
-    lastNameController.dispose();
-    mobileController.dispose();
-    dobController.dispose();
-    firstNameFocus.dispose();
-    lastNameFocus.dispose();
-    mobileFocus.dispose();
-    dobFocus.dispose();
+    carnumberController.dispose();
+    LicenseController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    carnumberFocus.dispose();
+    LicenseFocus.dispose();
+    emailFocus.dispose();
+    phoneFocus.dispose();
     super.dispose();
   }
 
@@ -91,18 +73,22 @@ class _SetUpProfileState extends State<SetUpProfile> {
     return Scaffold(
       backgroundColor: AppColors.lightGrayBackground,
       appBar: AppBar(
-        elevation: 0,
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-        toolbarHeight: 35,
         title: const Text(
-          "Set Up Profile",
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          "Edit Profile",
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
-        foregroundColor: AppColors.pureWhite,
+        centerTitle: true,
+        elevation: 0,
+        toolbarHeight: 45,
+        leading: IconButton(
+          onPressed: () {
+            context.go("/profile");
+          },
+          icon: const Icon(Icons.arrow_back_ios_new, size: 18),
+        ),
         backgroundColor: AppColors.electricTeal,
+        foregroundColor: AppColors.pureWhite,
       ),
-
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
         child: Column(
@@ -169,25 +155,40 @@ class _SetUpProfileState extends State<SetUpProfile> {
 
             const SizedBox(height: 20),
 
-            //  First Name
+            //  email Number
             CustomAnimatedTextField(
-              controller: firstNameController,
-              focusNode: firstNameFocus,
-              labelText: "First Name",
-              hintText: "First Name",
-              prefixIcon: Icons.person_outline,
+              controller: phoneController,
+              focusNode: phoneFocus,
+              labelText: "Phone Number",
+              hintText: "Phone Number",
+              prefixIcon: Icons.phone_outlined,
               iconColor: AppColors.electricTeal,
               borderColor: AppColors.electricTeal,
-              textColor:AppColors.mediumGray,
+              textColor: AppColors.mediumGray,
+              keyboardType: TextInputType.phone,
             ),
             const SizedBox(height: 10),
 
-            // Last Name
             CustomAnimatedTextField(
-              controller: lastNameController,
-              focusNode: lastNameFocus,
-              labelText: "Last Name",
-              hintText: "Last Name",
+              controller: emailController,
+              focusNode: emailFocus,
+              labelText: "Email Address",
+              hintText: "Email Address",
+              prefixIcon: Icons.phone_outlined,
+              iconColor: AppColors.electricTeal,
+              borderColor: AppColors.electricTeal,
+              textColor: AppColors.mediumGray,
+              keyboardType: TextInputType.emailAddress,
+            ),
+
+            const SizedBox(height: 10),
+
+            //  Car Number
+            CustomAnimatedTextField(
+              controller: carnumberController,
+              focusNode: carnumberFocus,
+              labelText: "Car Number",
+              hintText: "Car Number",
               prefixIcon: Icons.person_outline,
               iconColor: AppColors.electricTeal,
               borderColor: AppColors.electricTeal,
@@ -195,36 +196,16 @@ class _SetUpProfileState extends State<SetUpProfile> {
             ),
             const SizedBox(height: 10),
 
-            //  Mobile Number
+            // License
             CustomAnimatedTextField(
-              controller: mobileController,
-              focusNode: mobileFocus,
-              labelText: "Mobile Number",
-              hintText: "Mobile Number",
-              prefixIcon: Icons.phone_outlined,
+              controller: LicenseController,
+              focusNode: LicenseFocus,
+              labelText: "License",
+              hintText: "License",
+              prefixIcon: Icons.person_outline,
               iconColor: AppColors.electricTeal,
               borderColor: AppColors.electricTeal,
-              textColor:AppColors.mediumGray,
-              keyboardType: TextInputType.phone,
-            ),
-            const SizedBox(height: 10),
-
-            // Date of Birth
-            CustomAnimatedTextField(
-              controller: dobController,
-              focusNode: dobFocus,
-              labelText: "Date of Birth",
-              hintText: "DD/MM/YYYY",
-              prefixIcon: Icons.calendar_today_outlined,
-              iconColor: AppColors.electricTeal,
-              borderColor: AppColors.electricTeal,
-              textColor: Colors.black87,
-              keyboardType: TextInputType.datetime,
-              suffixIcon: IconButton(
-                icon: const Icon(Icons.keyboard_arrow_down_rounded),
-                color: AppColors.electricTeal,
-                onPressed: selectDate,
-              ),
+              textColor: AppColors.mediumGray,
             ),
 
             const SizedBox(height: 30),
@@ -234,16 +215,13 @@ class _SetUpProfileState extends State<SetUpProfile> {
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: CustomButton(
                 isChecked: isChecked,
-                text: "Next",
+                text: "Updated",
                 backgroundColor: AppColors.electricTeal,
                 borderColor: AppColors.electricTeal,
-                textColor: AppColors.pureWhite,
+                textColor: AppColors.lightGrayBackground,
                 onPressed: () {
                   if (isChecked) {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => RegisterSuccessful()),
-                      );
+                    context.go("/profile");
                   }
                 },
               ),

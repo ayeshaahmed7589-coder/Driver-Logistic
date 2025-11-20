@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'export.dart';
+import 'features/routes/app_routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Logistic Driver',
       theme: ThemeData(
@@ -21,19 +22,7 @@ class MyApp extends StatelessWidget {
           elevation: 0,
         ),
       ),
-      // home: TripsHomePage(),
-      home: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle(
-          statusBarColor: AppColors.electricTeal,
-          statusBarBrightness: Brightness.light,
-          statusBarIconBrightness: Brightness.light,
-          systemNavigationBarColor: AppColors.pureWhite,
-          systemNavigationBarIconBrightness: Brightness.dark,
-        ),
-        child: SplashScreen(),
-        // child:  TripsBottomNavBarScreen(initialIndex: 0),
-      ),
-      //  routerConfig: router,
+      routerConfig: router,
     );
   }
 }

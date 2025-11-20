@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:logisticdriverapp/constants/colors.dart';
 
 import '../../export.dart';
@@ -12,33 +13,25 @@ class ForgotPassword extends StatefulWidget {
 
 class _ForgotPasswordState extends State<ForgotPassword> {
   final emailFocus = FocusNode();
-  // final FocusNode _focusNode = FocusNode();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController PasswordController = TextEditingController();
-  final passwordFocus = FocusNode();
 
-  bool _showNewPassEye = false;
+  final TextEditingController emailController = TextEditingController();
+
+  
   bool _isFormFilled = false;
 
   @override
   void initState() {
     super.initState();
-    PasswordController.addListener(_passwordListener);
+    
     emailController.addListener(_checkFormFilled);
-    PasswordController.addListener(_checkFormFilled);
+
   }
 
-  void _passwordListener() {
-    final shouldShow = PasswordController.text.isNotEmpty;
-    if (shouldShow != _showNewPassEye) {
-      setState(() => _showNewPassEye = shouldShow);
-    }
-  }
 
   ///  check karega ki dono fields filled hain ya nahi
   void _checkFormFilled() {
     final isFilled =
-        emailController.text.isNotEmpty && PasswordController.text.isNotEmpty;
+        emailController.text.isNotEmpty;
 
     if (isFilled != _isFormFilled) {
       setState(() => _isFormFilled = isFilled);
@@ -50,9 +43,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   void dispose() {
     emailFocus.dispose();
-    passwordFocus.dispose();
     emailController.dispose();
-    PasswordController.dispose();
     super.dispose();
   }
 
@@ -118,16 +109,16 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: CustomButton(
-                  isChecked: _isFormFilled,
+                  isChecked: emailController.text.isNotEmpty,
                   text: "Submit",
-                  backgroundColor: _isFormFilled
+                  backgroundColor: emailController.text.isNotEmpty
                       ? AppColors.electricTeal
                       : inactiveColor,
                   borderColor: AppColors.electricTeal,
                   textColor: AppColors.lightGrayBackground,
-                  onPressed: _isFormFilled
+                  onPressed: emailController.text.isNotEmpty
                       ? () {
-                          debugPrint("Submit");
+                          context.go('/create-password');
                         }
                       : null,
                 ),
