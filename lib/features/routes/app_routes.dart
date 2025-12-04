@@ -1,11 +1,9 @@
 import 'package:go_router/go_router.dart';
 
 // Auth Screens
-import 'package:logisticdriverapp/features/authentication/login.dart';
 import 'package:logisticdriverapp/features/authentication/register.dart';
 import 'package:logisticdriverapp/features/authentication/register_successful.dart';
 import 'package:logisticdriverapp/features/authentication/create_password.dart';
-import 'package:logisticdriverapp/features/authentication/forgot_password.dart';
 
 // Bottom Navbar
 import 'package:logisticdriverapp/features/bottom_navbar/bottom_navbar_screen.dart';
@@ -24,6 +22,9 @@ import 'package:logisticdriverapp/features/home/map_screen.dart';
 import 'package:logisticdriverapp/features/home/notification_screen.dart';
 import 'package:logisticdriverapp/features/home/order_successful.dart';
 import 'package:logisticdriverapp/features/home/summary_screen.dart';
+
+import '../authentication/Login/login.dart';
+import '../authentication/forget_password/forgot_password.dart';
 
 final GoRouter router = GoRouter(
   routes: [
