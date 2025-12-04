@@ -178,7 +178,7 @@ class _CurrentScreenState extends State<CurrentScreen>
 
               return GestureDetector(
                 onTap: () {
-                  context.go('/order-details');
+                  context.push('/order-details');
                 },
                 child: Container(
                   padding: const EdgeInsets.all(16),

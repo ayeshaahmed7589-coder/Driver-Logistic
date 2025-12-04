@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'export.dart';
 import 'features/routes/app_routes.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope( // ✅ Wrap the app with ProviderScope
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
