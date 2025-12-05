@@ -146,7 +146,6 @@ import '../../../common_widgets/custom_button.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/gap.dart';
 import '../../../constants/validation_regx.dart';
-import '../otp.dart';
 import 'forget_password_controller.dart';
 import 'forget_password_modal.dart';
 

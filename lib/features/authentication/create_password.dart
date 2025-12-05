@@ -28,7 +28,6 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
   bool _showConPassEye = false;
 
   bool _isFormValid = false;
-  bool _isFormFilled = false;
 
   @override
   void initState() {

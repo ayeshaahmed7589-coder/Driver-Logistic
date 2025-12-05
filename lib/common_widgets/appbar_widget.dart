@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:logisticdriverapp/constants/colors.dart';
 import 'package:logisticdriverapp/export.dart';
 
-class BuyerAppBarWidget extends StatelessWidget {
-  BuyerAppBarWidget({
+class BuyerAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
+  const BuyerAppBarWidget({
     super.key,
     required this.controller,
     required this.segmentControlValue,
@@ -18,75 +17,71 @@ class BuyerAppBarWidget extends StatelessWidget {
   final void Function(int) segmentCallback;
 
   @override
+  Size get preferredSize => const Size.fromHeight(160); // compact height
+
+  @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
-        // statusBarColor: Color(0xFF1A56DB),
         statusBarIconBrightness: Brightness.light,
         statusBarBrightness: Brightness.dark,
       ),
       child: AppBar(
         backgroundColor: AppColors.electricTeal,
-        toolbarHeight: 200,
+        toolbarHeight: preferredSize.height,
         elevation: 0,
         automaticallyImplyLeading: false,
         shape: const RoundedRectangleBorder(
-          // borderRadius: BorderRadius.only(
-          //   bottomLeft: Radius.circular(25),
-          //   bottomRight: Radius.circular(25),
-          // ),
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(0),
+          ),
         ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Top Row: Greeting + Notification
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-
-                  children: [
-                    CustomText(
-                      txt: "Hello Jhon",
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ],
+                CustomText(
+                  txt: "Hello Jhon",
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
                 ),
-                Padding(
-                  padding: EdgeInsets.only(right: 0, top: 10),
-                  child: IconButton(
-                    onPressed: () {
-                      context.push("/notifications");
-                    },
-                    icon: Icon(
-                      Icons.notifications_none,
-                      color: Colors.white,
-                      size: 25,
-                    ),
+                IconButton(
+                  onPressed: () {
+                    context.push("/notifications");
+                  },
+                  icon: const Icon(
+                    Icons.notifications_none,
+                    color: Colors.white,
+                    size: 26,
                   ),
                 ),
               ],
             ),
 
             const SizedBox(height: 12),
-            TabBar(
-              controller: tabController,
-              indicator: UnderlineTabIndicator(
-                borderSide: BorderSide(width: 6.0, color: Colors.white),
-                insets: EdgeInsets.symmetric(horizontal: 16.0),
+
+            // TabBar
+            SizedBox(
+              height: 50, // fixed height to prevent overflow
+              child: TabBar(
+                controller: tabController,
+                indicator: const UnderlineTabIndicator(
+                  borderSide: BorderSide(width: 4.0, color: Colors.white),
+                  insets: EdgeInsets.symmetric(horizontal: 16.0),
+                ),
+                indicatorSize: TabBarIndicatorSize.tab,
+                labelColor: Colors.white,
+                unselectedLabelColor: Colors.white70,
+                labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+                tabs: const [
+                  Tab(text: "Home"),
+                  Tab(text: "My Orders"),
+                ],
               ),
-              indicatorSize: TabBarIndicatorSize.tab,
-              labelColor: Colors.white,
-              unselectedLabelColor: Colors.white70,
-              labelStyle: const TextStyle(fontWeight: FontWeight.bold),
-              tabs: const [
-                Tab(text: "Current"),
-                Tab(text: "Completed"),
-                Tab(text: "Future"),
-              ],
             ),
           ],
         ),

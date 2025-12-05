@@ -18,7 +18,7 @@ export 'package:flutter/services.dart';
 export 'package:logisticdriverapp/common_widgets/custom_text.dart';
 export 'package:pin_code_fields/pin_code_fields.dart';
 export 'dart:async';
-export 'package:logisticdriverapp/features/home/main_screens/current_screen.dart';
+export 'package:logisticdriverapp/features/home/main_screens/home_screen.dart';
 export 'package:logisticdriverapp/features/home/scan_barcode_scanner.dart';
 export 'package:logisticdriverapp/features/home/conform_order_screen.dart';
 

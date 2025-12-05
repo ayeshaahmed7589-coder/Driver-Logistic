@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logisticdriverapp/constants/colors.dart';
 import 'package:logisticdriverapp/features/home/Profile/earning_screen.dart';
-import 'package:logisticdriverapp/features/home/main_screens/current_screen.dart';
+import 'package:logisticdriverapp/features/home/main_screens/home_screen.dart';
 import 'package:logisticdriverapp/features/home/Profile/get_profile_screen.dart';
 import 'package:logisticdriverapp/features/home/order_detail_screen.dart';
 

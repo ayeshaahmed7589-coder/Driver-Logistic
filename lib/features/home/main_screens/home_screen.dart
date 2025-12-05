@@ -413,8 +413,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logisticdriverapp/common_widgets/appbar_widget.dart';
 import 'package:logisticdriverapp/constants/colors.dart';
-import 'package:logisticdriverapp/features/home/main_screens/completed_screen.dart';
-import 'package:logisticdriverapp/features/home/main_screens/future_screen.dart';
+import 'package:logisticdriverapp/features/home/main_screens/my_order_screen.dart';
 
 class CurrentScreen extends StatefulWidget {
   const CurrentScreen({super.key});
@@ -452,16 +451,12 @@ class _CurrentScreenState extends State<CurrentScreen>
     {"pickup": "FB Area", "drop": "Clifton", "earning": "\$21"},
   ];
 
-  final List<String> orderTabs = [
-    "Active Orders",
-    "Available Orders",
-    "Recent Orders",
-  ];
+  final List<String> orderTabs = ["Active Orders", "Available Orders","Recent Orders"];
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
   }
 
   @override
@@ -496,7 +491,10 @@ class _CurrentScreenState extends State<CurrentScreen>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: [_buildTripsList(), CompletedScreen(), FutureScreen()],
+        children: [
+          _buildTripsList(),
+          const MyOrderScreen(),
+        ],
       ),
     );
   }
@@ -663,6 +661,7 @@ class _CurrentScreenState extends State<CurrentScreen>
               color: AppColors.darkText,
             ),
           ),
+          const SizedBox(height: 12),
           Row(
             children: [
               Expanded(
@@ -684,6 +683,7 @@ class _CurrentScreenState extends State<CurrentScreen>
               color: AppColors.darkText,
             ),
           ),
+          const SizedBox(height: 12),
           Row(
             children: [
               Expanded(
@@ -1006,6 +1006,7 @@ class _CurrentScreenState extends State<CurrentScreen>
                 child: ElevatedButton(
                   onPressed: () => context.push('/order-details'),
                   style: ElevatedButton.styleFrom(
+                    foregroundColor: AppColors.pureWhite,
                     backgroundColor: AppColors.electricTeal,
                     elevation: 0,
                     padding: const EdgeInsets.symmetric(vertical: 12),
