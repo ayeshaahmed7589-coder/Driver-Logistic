@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:logisticdriverapp/common_widgets/appbar_widget.dart';
 import 'package:logisticdriverapp/constants/colors.dart';
 import 'package:logisticdriverapp/features/home/main_screens/my_order_screen/my_order_screen.dart';
@@ -527,6 +526,9 @@ class _CurrentScreenState extends ConsumerState<CurrentScreen>
     );
   }
 
+
+
+// main cards
   Widget _buildTripCard(Order trip) {
     return Container(
       padding: const EdgeInsets.all(14),
@@ -681,6 +683,7 @@ class _CurrentScreenState extends ConsumerState<CurrentScreen>
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
+             
               ),
               const SizedBox(width: 12),
               Container(

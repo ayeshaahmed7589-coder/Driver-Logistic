@@ -1,5 +1,6 @@
 // Helper functions
 int parseInt(dynamic value) {
+  print("parseInt received: $value, type: ${value.runtimeType}");
   if (value == null) return 0;
   if (value is int) return value;
   if (value is String) return int.tryParse(value) ?? 0;
@@ -223,12 +224,21 @@ class PackageInfo {
     required this.description,
   });
 
-  factory PackageInfo.fromJson(Map<String, dynamic> json) => PackageInfo(
-    totalItems: parseInt(json['total_items']),
-    totalWeight: parseInt(json['total_weight']),
-    totalValue: parseInt(json['total_value']),
-    description: json['description'] ?? '',
-  );
+  factory PackageInfo.fromJson(Map<String, dynamic> json) {
+    print("total_weight type: ${json['total_weight'].runtimeType}");
+    return PackageInfo(
+      totalItems: parseInt(json['total_items']),
+      totalWeight: parseInt(json['total_weight']),
+      totalValue: parseInt(json['total_value']),
+      description: json['description'] ?? '',
+    );
+  }
+  // factory PackageInfo.fromJson(Map<String, dynamic> json) => PackageInfo(
+  //   totalItems: parseInt(json['total_items']),
+  //   totalWeight: parseInt(json['total_weight']),
+  //   totalValue: parseInt(json['total_value']),
+  //   description: json['description'] ?? '',
+  // );
 }
 
 /// ---------------- ORDER DETAILS ----------------

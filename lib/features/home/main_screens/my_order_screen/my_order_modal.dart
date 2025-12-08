@@ -1,4 +1,4 @@
-class OrderModel {
+class OrderModelDetail {
   final String orderId;
   final String pickup;
   final String drop;
@@ -7,7 +7,7 @@ class OrderModel {
   final String customer;
   final String status;
 
-  OrderModel({
+  OrderModelDetail({
     required this.orderId,
     required this.pickup,
     required this.drop,
@@ -17,12 +17,12 @@ class OrderModel {
     required this.status,
   });
 
-  factory OrderModel.fromJson(Map<String, dynamic> json) {
+  factory OrderModelDetail.fromJson(Map<String, dynamic> json) {
     // Combine product names into a single string
     final items = json['items'] as List<dynamic>? ?? [];
     final productNames = items.map((item) => item['product_name'].toString()).join(", ");
 
-    return OrderModel(
+    return OrderModelDetail(
       orderId: json['order_number'] ?? '', // order number from API
       pickup: json['pickup_address'] ?? '',
       drop: json['delivery_address'] ?? '',

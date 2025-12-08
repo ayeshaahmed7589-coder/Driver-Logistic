@@ -6,12 +6,12 @@ import 'my_order_repo.dart';
 
 /// 1️⃣ My Orders Controller
 final myOrdersControllerProvider =
-    StateNotifierProvider<MyOrdersController, AsyncValue<List<OrderModel>>>((ref) {
+    StateNotifierProvider<MyOrdersController, AsyncValue<List<OrderModelDetail>>>((ref) {
   final repo = ref.watch(orderRepositoryProvider);
   return MyOrdersController(repo);
 });
 
-class MyOrdersController extends StateNotifier<AsyncValue<List<OrderModel>>> {
+class MyOrdersController extends StateNotifier<AsyncValue<List<OrderModelDetail>>> {
   final OrderRepository repository;
 
   MyOrdersController(this.repository) : super(const AsyncValue.loading()) {
@@ -31,12 +31,12 @@ class MyOrdersController extends StateNotifier<AsyncValue<List<OrderModel>>> {
 
 /// 2️⃣ Available Orders Controller
 final availableOrdersControllerProvider =
-    StateNotifierProvider<AvailableOrdersController, AsyncValue<List<OrderModel>>>((ref) {
+    StateNotifierProvider<AvailableOrdersController, AsyncValue<List<OrderModelDetail>>>((ref) {
   final repo = ref.watch(orderRepositoryProvider);
   return AvailableOrdersController(repo);
 });
 
-class AvailableOrdersController extends StateNotifier<AsyncValue<List<OrderModel>>> {
+class AvailableOrdersController extends StateNotifier<AsyncValue<List<OrderModelDetail>>> {
   final OrderRepository repository;
 
   AvailableOrdersController(this.repository) : super(const AsyncValue.loading()) {
@@ -55,7 +55,7 @@ class AvailableOrdersController extends StateNotifier<AsyncValue<List<OrderModel
 }
 
 /// 3️⃣ Filtered Providers
-final activeOrdersProvider = Provider<List<OrderModel>>((ref) {
+final activeOrdersProvider = Provider<List<OrderModelDetail>>((ref) {
   final myOrdersAsync = ref.watch(myOrdersControllerProvider);
   return myOrdersAsync.maybeWhen(
     data: (orders) => orders
@@ -69,7 +69,7 @@ final activeOrdersProvider = Provider<List<OrderModel>>((ref) {
   );
 });
 
-final recentOrdersProvider = Provider<List<OrderModel>>((ref) {
+final recentOrdersProvider = Provider<List<OrderModelDetail>>((ref) {
   final myOrdersAsync = ref.watch(myOrdersControllerProvider);
   return myOrdersAsync.maybeWhen(
     data: (orders) => orders.where((o) => o.status == 'completed').toList(),
@@ -77,7 +77,7 @@ final recentOrdersProvider = Provider<List<OrderModel>>((ref) {
   );
 });
 
-final filteredAvailableOrdersProvider = Provider<List<OrderModel>>((ref) {
+final filteredAvailableOrdersProvider = Provider<List<OrderModelDetail>>((ref) {
   final availableAsync = ref.watch(availableOrdersControllerProvider);
   return availableAsync.maybeWhen(
     data: (orders) =>

@@ -17,13 +17,13 @@ class OrderRepository {
   OrderRepository({required this.dio});
 
   /// Fetch My Orders
-  Future<List<OrderModel>> getMyOrders() async {
+  Future<List<OrderModelDetail>> getMyOrders() async {
     try {
       final response = await dio.get(ApiUrls.myorders);
 
       if (response.statusCode == 200) {
         final data = response.data['data'] as List;
-        return data.map((e) => OrderModel.fromJson(e)).toList();
+        return data.map((e) => OrderModelDetail.fromJson(e)).toList();
       } else {
         throw Exception(response.data['message'] ?? 'Failed to load My Orders');
       }
@@ -34,13 +34,13 @@ class OrderRepository {
   }
 
   /// Fetch Available Orders
-  Future<List<OrderModel>> getAvailableOrders() async {
+  Future<List<OrderModelDetail>> getAvailableOrders() async {
     try {
       final response = await dio.get(ApiUrls.availableorders);
 
       if (response.statusCode == 200) {
         final data = response.data['data'] as List;
-        return data.map((e) => OrderModel.fromJson(e)).toList();
+        return data.map((e) => OrderModelDetail.fromJson(e)).toList();
       } else {
         throw Exception(response.data['message'] ?? 'Failed to load Available Orders');
       }

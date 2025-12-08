@@ -5,7 +5,7 @@ import '../../../../../constants/colors.dart';
 import '../my_order_modal.dart';
 
 class OrderCard extends StatelessWidget {
-  final OrderModel order;
+  final OrderModelDetail order;
   const OrderCard({super.key, required this.order});
 
   @override
