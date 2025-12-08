@@ -1,26 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logisticdriverapp/export.dart';
+import '../features/home/main_screens/home_screen/home_modal.dart';
+import '../features/home/main_screens/home_screen/home_controller.dart';
 
-class BuyerAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
+class BuyerAppBarWidget extends ConsumerWidget implements PreferredSizeWidget {
+  final DriverInfo? driver; // optional driver
+  final TextEditingController controller;
+  final int segmentControlValue;
+  final TabController tabController;
+  final void Function(int) segmentCallback;
+
   const BuyerAppBarWidget({
     super.key,
+    this.driver,
     required this.controller,
     required this.segmentControlValue,
     required this.segmentCallback,
     required this.tabController,
   });
 
-  final TextEditingController controller;
-  final int segmentControlValue;
-  final TabController tabController;
-  final void Function(int) segmentCallback;
+  @override
+  Size get preferredSize => const Size.fromHeight(160);
 
   @override
-  Size get preferredSize => const Size.fromHeight(160); // compact height
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Use the driver passed in OR get from dashboard state
+    final dashboardState = ref.watch(dashboardControllerProvider);
+    DriverInfo? currentDriver = driver;
 
-  @override
-  Widget build(BuildContext context) {
+    dashboardState.whenData((data) {
+      currentDriver ??= data?.driverInfo;
+    });
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
         statusBarIconBrightness: Brightness.light,
@@ -32,9 +45,7 @@ class BuyerAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         elevation: 0,
         automaticallyImplyLeading: false,
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(0),
-          ),
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(0)),
         ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +55,7 @@ class BuyerAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CustomText(
-                  txt: "Hello Jhon",
+                  txt: "Hello, ${currentDriver?.name ?? 'Driver'}",
                   color: Colors.white,
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -61,12 +72,10 @@ class BuyerAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ],
             ),
-
             const SizedBox(height: 12),
-
             // TabBar
             SizedBox(
-              height: 50, // fixed height to prevent overflow
+              height: 50,
               child: TabBar(
                 controller: tabController,
                 indicator: const UnderlineTabIndicator(

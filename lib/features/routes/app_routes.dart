@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 // Auth Screens
@@ -25,20 +26,15 @@ import 'package:logisticdriverapp/features/home/summary_screen.dart';
 
 import '../authentication/Login/login.dart';
 import '../authentication/forget_password/forgot_password.dart';
+import '../home/order_details_screen/order_detail_screen.dart';
 
 final GoRouter router = GoRouter(
   routes: [
     // ---------- Splash ----------
-    GoRoute(
-      path: '/',
-      builder: (context, state) => const SplashScreen(),
-    ),
+    GoRoute(path: '/', builder: (context, state) => const SplashScreen()),
 
     // ---------- Authentication ----------
-    GoRoute(
-      path: '/login',
-      builder: (context, state) => const Login(),
-    ),
+    GoRoute(path: '/login', builder: (context, state) => const Login()),
     GoRoute(
       path: '/register',
       builder: (context, state) => const SignUpScreen(),
@@ -60,22 +56,31 @@ final GoRouter router = GoRouter(
     // ---------- Bottom Navbar ----------
     GoRoute(
       path: '/home',
-      builder: (context, state) => const TripsBottomNavBarScreen(initialIndex: 0),
+      builder: (context, state) =>
+          const TripsBottomNavBarScreen(initialIndex: 0),
     ),
 
     GoRoute(
       path: '/order-details',
-      builder: (context, state) => const TripsBottomNavBarScreen(initialIndex: 1),
+      builder: (context, state) {
+        final orderId = state.extra as int? ?? 0; // safe fallback
+        if (orderId == 0) {
+          return const Scaffold(body: Center(child: Text("Invalid order ID")));
+        }
+        return TripsBottomNavBarScreen(initialIndex: 1, orderId: orderId);
+      },
     ),
 
-     GoRoute(
+    GoRoute(
       path: '/earning',
-      builder: (context, state) => const TripsBottomNavBarScreen(initialIndex: 2),
+      builder: (context, state) =>
+          const TripsBottomNavBarScreen(initialIndex: 2),
     ),
 
     GoRoute(
       path: '/profile',
-      builder: (context, state) => const TripsBottomNavBarScreen(initialIndex: 3),
+      builder: (context, state) =>
+          const TripsBottomNavBarScreen(initialIndex: 3),
     ),
 
     GoRoute(
@@ -116,9 +121,6 @@ final GoRouter router = GoRouter(
       path: '/notifications',
       builder: (context, state) => const NotificationScreen(),
     ),
-    GoRoute(
-      path: '/map',
-      builder: (context, state) => const MapScreen(),
-    ),
+    GoRoute(path: '/map', builder: (context, state) => const MapScreen()),
   ],
 );

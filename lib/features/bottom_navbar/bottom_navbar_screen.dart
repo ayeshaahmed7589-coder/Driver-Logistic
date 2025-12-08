@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:logisticdriverapp/constants/colors.dart';
 import 'package:logisticdriverapp/features/home/Profile/earning_screen.dart';
-import 'package:logisticdriverapp/features/home/main_screens/home_screen.dart';
+import 'package:logisticdriverapp/features/home/main_screens/home_screen/home_screen.dart';
 import 'package:logisticdriverapp/features/home/Profile/get_profile_screen.dart';
-import 'package:logisticdriverapp/features/home/order_detail_screen.dart';
+import 'package:logisticdriverapp/features/home/order_details_screen/order_detail_screen.dart';
 
 class TripsBottomNavBarScreen extends StatefulWidget {
   final int initialIndex;
-  const TripsBottomNavBarScreen({super.key, this.initialIndex = 0});
+  final int? orderId; // Optional order ID
+
+  const TripsBottomNavBarScreen({
+    super.key,
+    this.initialIndex = 0,
+    this.orderId,
+  });
 
   @override
   State<TripsBottomNavBarScreen> createState() =>
@@ -17,17 +23,25 @@ class TripsBottomNavBarScreen extends StatefulWidget {
 class _TripsBottomNavBarScreenState extends State<TripsBottomNavBarScreen> {
   late int _selectedIndex;
 
-  final List<Widget> _screens = const [
-    CurrentScreen(), 
-    OrderDetailsScreen(),
-    EarningsScreen(),
-    GetProfileScreen(),
-  ];
-
   @override
   void initState() {
     super.initState();
     _selectedIndex = widget.initialIndex;
+  }
+
+  /// Screens list
+  List<Widget> getScreens() {
+    return [
+      const CurrentScreen(),
+      // Pass orderId safely; if null, show a placeholder or message
+      widget.orderId != null
+          ? OrderDetailsScreen(orderId: widget.orderId!)
+          : const Center(
+              child: Text("No order selected", style: TextStyle(fontSize: 16)),
+            ),
+      const EarningsScreen(),
+      const GetProfileScreen(),
+    ];
   }
 
   void _onItemTapped(int index) {
@@ -39,10 +53,9 @@ class _TripsBottomNavBarScreenState extends State<TripsBottomNavBarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(children: [Expanded(child: _screens[_selectedIndex])]),
-      // body: SafeArea(child: _screens[_selectedIndex]),
+      body: getScreens()[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        elevation: 80,
+        elevation: 8,
         currentIndex: _selectedIndex,
         backgroundColor: AppColors.pureWhite,
         selectedItemColor: AppColors.electricTeal,

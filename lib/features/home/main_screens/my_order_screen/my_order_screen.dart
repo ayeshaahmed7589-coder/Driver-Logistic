@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:logisticdriverapp/constants/colors.dart';
 import 'package:logisticdriverapp/constants/gap.dart';
-import 'package:logisticdriverapp/features/home/main_screens/My_Orders/active_order_screen.dart';
-import 'package:logisticdriverapp/features/home/main_screens/My_Orders/available_orders_screen.dart';
-import 'package:logisticdriverapp/features/home/main_screens/My_Orders/recent_orders_screen.dart';
+import 'package:logisticdriverapp/features/home/main_screens/my_order_screen/My_Orders/active_order_screen.dart';
+import 'package:logisticdriverapp/features/home/main_screens/my_order_screen/My_Orders/available_orders_screen.dart';
+import 'package:logisticdriverapp/features/home/main_screens/my_order_screen/My_Orders/recent_orders_screen.dart';
 import 'package:logisticdriverapp/common_widgets/custom_text.dart';
 
 class MyOrderScreen extends StatefulWidget {
