@@ -26,7 +26,6 @@ import 'package:logisticdriverapp/features/home/summary_screen.dart';
 
 import '../authentication/Login/login.dart';
 import '../authentication/forget_password/forgot_password.dart';
-import '../home/order_details_screen/order_detail_screen.dart';
 
 final GoRouter router = GoRouter(
   routes: [
@@ -121,6 +120,34 @@ final GoRouter router = GoRouter(
       path: '/notifications',
       builder: (context, state) => const NotificationScreen(),
     ),
-    GoRoute(path: '/map', builder: (context, state) => const MapScreen()),
+    GoRoute(
+      path: '/map',
+      builder: (context, state) {
+        // Extract orderId and type safely
+        final extra = state.extra as Map<String, dynamic>?;
+
+        // Safe fallback if extra is null or missing keys
+        if (extra == null || extra['order'] == null || extra['type'] == null) {
+          return const Scaffold(
+            body: Center(child: Text("Invalid map parameters")),
+          );
+        }
+
+        // Extract values
+        final orderId = extra['order'] is int
+            ? extra['order'] as int
+            : (extra['order']?.id ?? 0); // If 'order' is object, get its id
+        final type = extra['type'] as String;
+
+        // Check for invalid values
+        if (orderId == 0 || type.isEmpty) {
+          return const Scaffold(
+            body: Center(child: Text("Invalid map parameters")),
+          );
+        }
+
+        return MapScreen(orderId: orderId, type: type);
+      },
+    ),
   ],
 );

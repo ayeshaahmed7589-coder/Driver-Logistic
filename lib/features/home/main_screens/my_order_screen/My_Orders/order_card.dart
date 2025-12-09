@@ -33,7 +33,7 @@ class OrderCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Order #${order.orderId}",
+                "Order #${order.ordernumber}",
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
@@ -147,32 +147,36 @@ class OrderCard extends StatelessWidget {
           const SizedBox(height: 12),
           // Action Button
           ElevatedButton(
-  onPressed: () {
-    final id = order.orderId; // Use the correct ID field
-    if (id == 0) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Invalid order ID")),
-      );
-      return;
-    }
-    context.push('/order-details', extra: id);
-  },
-  style: ElevatedButton.styleFrom(
-    backgroundColor: AppColors.electricTeal,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(8),
-    ),
-    padding: const EdgeInsets.symmetric(vertical: 12),
-  ),
-  child: const Center(
-    child: Text(
-      "View Details",
-      style: TextStyle(
-          color: AppColors.pureWhite, fontWeight: FontWeight.bold),
-    ),
-  ),
-)
+            onPressed: () {
+              final id = order.orderId;
 
+              if (id == 0) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Invalid order ID")),
+                );
+                return;
+              }
+
+              context.push('/order-details', extra: id);
+            },
+
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.electricTeal,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 12),
+            ),
+            child: const Center(
+              child: Text(
+                "View Details",
+                style: TextStyle(
+                  color: AppColors.pureWhite,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

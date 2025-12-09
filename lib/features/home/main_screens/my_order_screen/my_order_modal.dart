@@ -1,6 +1,7 @@
 class OrderModelDetail {
-  final String orderId;
+  final int orderId;
   final String pickup;
+  final String ordernumber;
   final String drop;
   final String earning;
   final String product;
@@ -9,6 +10,7 @@ class OrderModelDetail {
 
   OrderModelDetail({
     required this.orderId,
+    required this.ordernumber,
     required this.pickup,
     required this.drop,
     required this.earning,
@@ -23,9 +25,10 @@ class OrderModelDetail {
     final productNames = items.map((item) => item['product_name'].toString()).join(", ");
 
     return OrderModelDetail(
-      orderId: json['order_number'] ?? '', // order number from API
+      orderId: int.tryParse(json['id'].toString()) ?? 0,
       pickup: json['pickup_address'] ?? '',
       drop: json['delivery_address'] ?? '',
+      ordernumber: json['order_number'] ?? '',
       earning: (json['estimated_earning'] ?? 0).toString(), // API field
       product: productNames,
       customer: json['customer_name'] ?? '',

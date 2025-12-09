@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:logisticdriverapp/common_widgets/appbar_widget.dart';
 import 'package:logisticdriverapp/constants/colors.dart';
 import 'package:logisticdriverapp/features/home/main_screens/my_order_screen/my_order_screen.dart';
-import 'package:logisticdriverapp/features/home/order_details_screen/order_detail_screen.dart';
 
 import 'home_controller.dart';
 import 'home_modal.dart';
@@ -659,15 +659,8 @@ class _CurrentScreenState extends ConsumerState<CurrentScreen>
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            OrderDetailsScreen(orderId: trip.id),
-                      ),
-                    );
                     // orderId is already an int
-                    // context.push('/order-details', extra: trip.id);
+                    context.push('/order-details', extra: trip.id);
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: AppColors.pureWhite,

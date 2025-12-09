@@ -61,6 +61,7 @@ dependencies:
   json_serializable: ^6.11.2
   build_runner: ^2.7.1
   riverpod_annotation: ^3.0.3
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   flutter_test:

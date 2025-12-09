@@ -15,25 +15,17 @@ class AvailableOrdersScreen extends ConsumerWidget {
 
     return availableOrdersAsync.when(
       loading: () => const Center(
-        child: CircularProgressIndicator(
-          color: AppColors.electricTeal,
-        ),
+        child: CircularProgressIndicator(color: AppColors.electricTeal),
       ),
       error: (err, stack) => Center(
-        child: Text(
-          'Something went wrong:\n$err',
-          textAlign: TextAlign.center,
-        ),
+        child: Text('Something went wrong:\n$err', textAlign: TextAlign.center),
       ),
       data: (orders) {
         final filteredOrders = ref.watch(filteredAvailableOrdersProvider);
 
         if (filteredOrders.isEmpty) {
           return const Center(
-            child: Text(
-              "No Available Orders",
-              style: TextStyle(fontSize: 16),
-            ),
+            child: Text("No Available Orders", style: TextStyle(fontSize: 16)),
           );
         }
 
@@ -86,7 +78,7 @@ class OrderCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Order #${order.orderId}",
+                "Order #${order.ordernumber}",
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
@@ -94,8 +86,10 @@ class OrderCard extends StatelessWidget {
                 ),
               ),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.electricTeal.withOpacity(0.12),
                   borderRadius: BorderRadius.circular(12),
@@ -115,8 +109,11 @@ class OrderCard extends StatelessWidget {
           // Pickup
           Row(
             children: [
-              const Icon(Icons.local_shipping_outlined,
-                  color: AppColors.electricTeal, size: 18),
+              const Icon(
+                Icons.local_shipping_outlined,
+                color: AppColors.electricTeal,
+                size: 18,
+              ),
               const SizedBox(width: 6),
               Expanded(
                 child: Text(
@@ -135,8 +132,11 @@ class OrderCard extends StatelessWidget {
           // Drop
           Row(
             children: [
-              const Icon(Icons.location_on_outlined,
-                  color: AppColors.electricTeal, size: 18),
+              const Icon(
+                Icons.location_on_outlined,
+                color: AppColors.electricTeal,
+                size: 18,
+              ),
               const SizedBox(width: 6),
               Expanded(
                 child: Text(
@@ -154,8 +154,11 @@ class OrderCard extends StatelessWidget {
           // Product
           Row(
             children: [
-              const Icon(Icons.shopping_bag_outlined,
-                  color: AppColors.electricTeal, size: 18),
+              const Icon(
+                Icons.shopping_bag_outlined,
+                color: AppColors.electricTeal,
+                size: 18,
+              ),
               const SizedBox(width: 6),
               Expanded(
                 child: Text(
@@ -173,8 +176,11 @@ class OrderCard extends StatelessWidget {
           // Customer
           Row(
             children: [
-              const Icon(Icons.person_outline,
-                  color: AppColors.electricTeal, size: 18),
+              const Icon(
+                Icons.person_outline,
+                color: AppColors.electricTeal,
+                size: 18,
+              ),
               const SizedBox(width: 6),
               Expanded(
                 child: Text(
@@ -191,8 +197,18 @@ class OrderCard extends StatelessWidget {
 
           // Action Button
           ElevatedButton(
-            onPressed: () =>
-                context.push('/order-details', extra: order.orderId),
+            onPressed: () {
+              final id = order.orderId;
+
+              if (id == 0) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Invalid order ID")),
+                );
+                return;
+              }
+
+              context.push('/order-details', extra: id);
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.electricTeal,
               shape: RoundedRectangleBorder(
@@ -204,7 +220,9 @@ class OrderCard extends StatelessWidget {
               child: Text(
                 "View Details",
                 style: TextStyle(
-                    color: AppColors.pureWhite, fontWeight: FontWeight.bold),
+                  color: AppColors.pureWhite,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),

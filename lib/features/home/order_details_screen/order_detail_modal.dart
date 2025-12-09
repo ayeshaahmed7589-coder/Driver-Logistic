@@ -65,13 +65,44 @@ class OrderModel {
           .map((e) => Item.fromJson(e))
           .toList(),
 
-      packageInfo: PackageInfo.fromJson(json['package']),
-      orderDetails: OrderDetails.fromJson(json['order_details']),
-      addOns: AddOns.fromJson(json['add_ons']),
-      payment: Payment.fromJson(json['payment']),
+      packageInfo: json['package'] != null 
+    ? PackageInfo.fromJson(json['package']) 
+    : PackageInfo(totalItems: 0, totalWeight: 0, totalValue: 0, description: ""),
+
+orderDetails: json['order_details'] != null
+    ? OrderDetails.fromJson(json['order_details'])
+    : OrderDetails(serviceType: "", vehicleType: "", priority: "", distanceKm: ""),
+
+addOns: json['add_ons'] != null
+    ? AddOns.fromJson(json['add_ons'])
+    : AddOns(selected: [], cost: 0, quickFlags: QuickFlags(
+        hasInsurance: false,
+        requiresSignature: false,
+        isFragile: false,
+        needsPhoto: false,
+        ageCheck: false,
+        contactless: false,
+      )),
+
+payment: json['payment'] != null
+    ? Payment.fromJson(json['payment'])
+    : Payment(
+        estimatedCost: "0",
+        finalCost: "0",
+        serviceFee: "0",
+        taxAmount: "0",
+        addOnsCost: "0",
+        driverEarning: 0.0,
+        paymentMethod: "",
+        paymentStatus: "",
+      ),
+
+timestamps: json['timestamps'] != null
+    ? OrderTimestamps.fromJson(json['timestamps'])
+    : OrderTimestamps(createdAt: "", assignedAt: null, pickedUpAt: null, completedAt: null),
+
       tracking: (json['tracking'] as List<dynamic>? ?? []),
 
-      timestamps: OrderTimestamps.fromJson(json['timestamps']),
     );
   }
 }
@@ -233,12 +264,6 @@ class PackageInfo {
       description: json['description'] ?? '',
     );
   }
-  // factory PackageInfo.fromJson(Map<String, dynamic> json) => PackageInfo(
-  //   totalItems: parseInt(json['total_items']),
-  //   totalWeight: parseInt(json['total_weight']),
-  //   totalValue: parseInt(json['total_value']),
-  //   description: json['description'] ?? '',
-  // );
 }
 
 /// ---------------- ORDER DETAILS ----------------
@@ -256,10 +281,10 @@ class OrderDetails {
   });
 
   factory OrderDetails.fromJson(Map<String, dynamic> json) => OrderDetails(
-    serviceType: json['service_type'],
-    vehicleType: json['vehicle_type'],
-    priority: json['priority'],
-    distanceKm: json['distance_km'],
+    serviceType: json['service_type'] ?? "",
+    vehicleType: json['vehicle_type'] ?? "",
+    priority: json['priority'] ?? "",
+    distanceKm: (json['distance_km'] ?? "").toString(),
   );
 }
 

@@ -6,7 +6,7 @@ import 'features/routes/app_routes.dart';
 
 void main() {
   runApp(
-    const ProviderScope( // ✅ Wrap the app with ProviderScope
+    const ProviderScope(
       child: MyApp(),
     ),
   );
