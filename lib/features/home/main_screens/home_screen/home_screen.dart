@@ -159,7 +159,7 @@ class _CurrentScreenState extends ConsumerState<CurrentScreen>
             if (driver == null) return const SizedBox();
 
             return Container(
-              padding: const EdgeInsets.all(14),
+              padding: const EdgeInsets.only(top: 14,left: 6,bottom: 14),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
@@ -184,7 +184,7 @@ class _CurrentScreenState extends ConsumerState<CurrentScreen>
                   _profileWithStatusDot(
                     driver.status == "available",
                   ), // ✅ reactive dot
-                  const SizedBox(width: 12),
+                  const SizedBox(width: 6),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -207,10 +207,16 @@ class _CurrentScreenState extends ConsumerState<CurrentScreen>
                               label: driver.rating.toString(),
                               isWhite: true,
                             ),
+                            // _infoBubble(
+                            //   icon: Icons.local_shipping_outlined,
+                            //   label:
+                            //       "${driver.vehicle?.vehicleType ?? '-'} · ${driver.vehicle?.registrationNumber ?? '-'}",
+                            //   isWhite: true,
+                            // ),
                             _infoBubble(
                               icon: Icons.local_shipping_outlined,
                               label:
-                                  "${driver.vehicle?.vehicleType ?? '-'} · ${driver.vehicle?.registrationNumber ?? '-'}",
+                                  driver.vehicle?.registrationNumber ?? '-',
                               isWhite: true,
                             ),
                           ],
@@ -219,7 +225,7 @@ class _CurrentScreenState extends ConsumerState<CurrentScreen>
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 4),
+                    padding: const EdgeInsets.only(top: 0),
                     child: _onlineToggleCompact(), // ✅ reactive Switch
                   ),
                 ],
@@ -247,12 +253,12 @@ class _CurrentScreenState extends ConsumerState<CurrentScreen>
       child: Row(
         children: [
           Icon(icon, size: 14, color: isWhite ? AppColors.pureWhite : null),
-          const SizedBox(width: 6),
+          const SizedBox(width: 3),
           Text(
             label,
             style: TextStyle(
               color: isWhite ? AppColors.pureWhite : null,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w800
             ),
           ),
         ],
@@ -433,7 +439,7 @@ class _CurrentScreenState extends ConsumerState<CurrentScreen>
                           }
                         },
                 ),
-                const SizedBox(width: 8),
+                const SizedBox(width: 3),
               ],
             );
           },

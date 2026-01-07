@@ -145,12 +145,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   borderColor: AppColors.electricTeal,
                   textColor: AppColors.pureWhite,
                   onPressed: () {
-                         
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => VerificationScreen()),
-                      );
-                    
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => VerificationScreen(),
+                      ),
+                    );
                   },
                 ),
               ),
@@ -161,7 +161,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "Already a Koovs Member? ",
+                    "Already a Drovvi Member? ",
                     style: TextStyle(color: AppColors.mediumGray, fontSize: 14),
                   ),
                   GestureDetector(

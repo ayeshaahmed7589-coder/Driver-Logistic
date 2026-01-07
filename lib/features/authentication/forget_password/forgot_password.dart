@@ -64,7 +64,7 @@
 //               crossAxisAlignment: CrossAxisAlignment.center,
 //               children: [
 //                 Text(
-//                   "koovs",
+//                   "Drovvi",
 //                   style: TextStyle(
 //                     color: AppColors.electricTeal,
 //                     fontSize: 50,
@@ -222,7 +222,7 @@ class _ForgotPasswordState extends ConsumerState<ForgotPassword> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "koovs",
+                  "Drovvi",
                   style: TextStyle(
                     color: AppColors.electricTeal,
                     fontSize: 50,

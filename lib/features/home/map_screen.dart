@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
 import 'package:go_router/go_router.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../export.dart';
 import 'order_details_screen/order_detail_controller.dart';
 import 'order_details_screen/order_detail_modal.dart';
@@ -416,3 +416,296 @@ class _MapScreenState extends ConsumerState<MapScreen> {
     );
   }
 }
+
+// import 'dart:math';
+// import 'package:dio/dio.dart';
+// import 'package:flutter/material.dart';
+// import 'package:google_maps_flutter/google_maps_flutter.dart';
+// import 'package:flutter_riverpod/flutter_riverpod.dart';
+// import 'package:geolocator/geolocator.dart';
+
+// import '../../export.dart';
+// import 'order_details_screen/order_detail_controller.dart';
+// import 'order_details_screen/order_detail_modal.dart';
+
+// class MapScreen extends ConsumerStatefulWidget {
+//   final int orderId;
+//   final String type;
+
+//   const MapScreen({
+//     super.key,
+//     required this.orderId,
+//     required this.type,
+//   });
+
+//   @override
+//   ConsumerState<MapScreen> createState() => _MapScreenState();
+// }
+
+// /// ---------------- LOCATION WRAPPER ----------------
+// class LocationWrapper {
+//   final String address;
+//   final String city;
+//   final String state;
+//   final String contactName;
+//   final String contactPhone;
+//   final String latitude;
+//   final String longitude;
+
+//   LocationWrapper.pickup(Pickup pickup)
+//       : address = pickup.address,
+//         city = pickup.city,
+//         state = pickup.state,
+//         contactName = pickup.contactName,
+//         contactPhone = pickup.contactPhone,
+//         latitude = pickup.latitude,
+//         longitude = pickup.longitude;
+
+//   LocationWrapper.delivery(Delivery delivery)
+//       : address = delivery.address,
+//         city = delivery.city,
+//         state = delivery.state,
+//         contactName = delivery.contactName,
+//         contactPhone = delivery.contactPhone,
+//         latitude = delivery.latitude,
+//         longitude = delivery.longitude;
+// }
+
+// class _MapScreenState extends ConsumerState<MapScreen> {
+//   GoogleMapController? _mapController;
+
+//   LatLng? _driverLocation;
+//   LatLng? _targetLocation;
+
+//   final Set<Polyline> _polylines = {};
+//   bool _showRoadRoute = false;
+//   bool _initialized = false;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _getCurrentLocation();
+//   }
+
+//   /// ---------------- DRIVER LOCATION ----------------
+//   Future<void> _getCurrentLocation() async {
+//     final permission = await Geolocator.requestPermission();
+
+//     if (permission == LocationPermission.denied ||
+//         permission == LocationPermission.deniedForever) {
+//       return;
+//     }
+
+//     final pos = await Geolocator.getCurrentPosition(
+//       desiredAccuracy: LocationAccuracy.high,
+//     );
+
+//     setState(() {
+//       _driverLocation = LatLng(pos.latitude, pos.longitude);
+//     });
+//   }
+
+//   LatLng _parseLatLng(String lat, String lng) {
+//     return LatLng(
+//       double.tryParse(lat) ?? 0,
+//       double.tryParse(lng) ?? 0,
+//     );
+//   }
+
+//   /// ---------------- POLYLINE DECODER ----------------
+//   List<LatLng> _decodePolyline(String encoded) {
+//     final List<LatLng> poly = [];
+//     int index = 0, lat = 0, lng = 0;
+
+//     while (index < encoded.length) {
+//       int shift = 0, result = 0;
+//       int b;
+
+//       do {
+//         b = encoded.codeUnitAt(index++) - 63;
+//         result |= (b & 0x1f) << shift;
+//         shift += 5;
+//       } while (b >= 0x20);
+
+//       lat += (result & 1) != 0 ? ~(result >> 1) : (result >> 1);
+
+//       shift = 0;
+//       result = 0;
+
+//       do {
+//         b = encoded.codeUnitAt(index++) - 63;
+//         result |= (b & 0x1f) << shift;
+//         shift += 5;
+//       } while (b >= 0x20);
+
+//       lng += (result & 1) != 0 ? ~(result >> 1) : (result >> 1);
+
+//       poly.add(LatLng(lat / 1E5, lng / 1E5));
+//     }
+//     return poly;
+//   }
+
+//   /// ---------------- ROAD ROUTE ----------------
+//   Future<void> _fetchRoadPolyline() async {
+//     if (_driverLocation == null || _targetLocation == null) return;
+
+//     final dio = Dio();
+//     final res = await dio.get(
+//       "https://maps.googleapis.com/maps/api/directions/json",
+//       queryParameters: {
+//         "origin":
+//             "${_driverLocation!.latitude},${_driverLocation!.longitude}",
+//         "destination":
+//             "${_targetLocation!.latitude},${_targetLocation!.longitude}",
+//         "key": "AIzaSyBrF_4PwauOkQ_RS8iGYhAW1NIApp3IEf0",
+//       },
+//     );
+
+//     if (res.statusCode == 200 && res.data["routes"].isNotEmpty) {
+//       final encoded =
+//           res.data["routes"][0]["overview_polyline"]["points"];
+
+//       setState(() {
+//         _polylines
+//           ..clear()
+//           ..add(
+//             Polyline(
+//               polylineId: const PolylineId("road"),
+//               color: Colors.green,
+//               width: 6,
+//               points: _decodePolyline(encoded),
+//             ),
+//           );
+//         _showRoadRoute = true;
+//       });
+//     }
+//   }
+
+//   /// ---------------- AIR ROUTE ----------------
+//   void _showAirRoute() {
+//     if (_driverLocation == null || _targetLocation == null) return;
+
+//     setState(() {
+//       _polylines
+//         ..clear()
+//         ..add(
+//           Polyline(
+//             polylineId: const PolylineId("air"),
+//             color: Colors.blue,
+//             width: 4,
+//             points: [_driverLocation!, _targetLocation!],
+//           ),
+//         );
+//       _showRoadRoute = false;
+//     });
+//   }
+
+//   /// ---------------- CAMERA FIT ----------------
+//   void _fitCamera() {
+//     if (_mapController == null ||
+//         _driverLocation == null ||
+//         _targetLocation == null) return;
+
+//     final bounds = LatLngBounds(
+//       southwest: LatLng(
+//         min(_driverLocation!.latitude, _targetLocation!.latitude),
+//         min(_driverLocation!.longitude, _targetLocation!.longitude),
+//       ),
+//       northeast: LatLng(
+//         max(_driverLocation!.latitude, _targetLocation!.latitude),
+//         max(_driverLocation!.longitude, _targetLocation!.longitude),
+//       ),
+//     );
+
+//     _mapController!.animateCamera(
+//       CameraUpdate.newLatLngBounds(bounds, 80),
+//     );
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final orderAsync =
+//         ref.watch(orderDetailsControllerProvider(widget.orderId));
+
+//     return orderAsync.when(
+//       loading: () => const Center(child: CircularProgressIndicator()),
+//       error: (e, _) => Center(child: Text("Error: $e")),
+//       data: (order) {
+//         if (_driverLocation == null) {
+//           return const Center(child: CircularProgressIndicator());
+//         }
+
+//         if (!_initialized) {
+//           final location = widget.type == "pickup"
+//               ? LocationWrapper.pickup(order.pickup)
+//               : LocationWrapper.delivery(order.delivery);
+
+//           _targetLocation =
+//               _parseLatLng(location.latitude, location.longitude);
+//           _initialized = true;
+//         }
+
+//         return Scaffold(
+//           body: Stack(
+//             children: [
+//               RepaintBoundary(
+//                 child: GoogleMap(
+//                   key: const ValueKey("google_map"),
+//                   initialCameraPosition: CameraPosition(
+//                     target: _driverLocation!,
+//                     zoom: 13,
+//                   ),
+//                   onMapCreated: (c) {
+//                     _mapController = c;
+//                     Future.delayed(
+//                       const Duration(milliseconds: 300),
+//                       _fitCamera,
+//                     );
+//                   },
+//                   myLocationEnabled: true,
+//                   myLocationButtonEnabled: true,
+//                   markers: {
+//                     Marker(
+//                       markerId: const MarkerId("driver"),
+//                       position: _driverLocation!,
+//                     ),
+//                     Marker(
+//                       markerId: const MarkerId("target"),
+//                       position: _targetLocation!,
+//                     ),
+//                   },
+//                   polylines: _polylines,
+//                 ),
+//               ),
+
+//               /// ROUTE BUTTONS
+//               Positioned(
+//                 bottom: 120,
+//                 right: 16,
+//                 child: Column(
+//                   children: [
+//                     FloatingActionButton(
+//                       heroTag: "air",
+//                       backgroundColor:
+//                           !_showRoadRoute ? Colors.blue : Colors.grey,
+//                       onPressed: _showAirRoute,
+//                       child: const Icon(Icons.flight),
+//                     ),
+//                     const SizedBox(height: 10),
+//                     FloatingActionButton(
+//                       heroTag: "road",
+//                       backgroundColor:
+//                           _showRoadRoute ? Colors.green : Colors.grey,
+//                       onPressed: _fetchRoadPolyline,
+//                       child: const Icon(Icons.directions_car),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ],
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }

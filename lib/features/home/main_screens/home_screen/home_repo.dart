@@ -16,7 +16,7 @@ class DashboardRepository {
 
   Future<String> updateAvailability(bool isOnline) async {
     try {
-      final resp = await dio.post(
+      final resp = await dio.put(
         ApiUrls.available,
         data: {"status": isOnline ? "available" : "off_duty"},
       );

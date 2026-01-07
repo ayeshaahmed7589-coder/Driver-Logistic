@@ -9,5 +9,6 @@ import UIKit
   ) -> Bool {
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+    GMSServices.provideAPIKey("AIzaSyBrF_4PwauOkQ_RS8iGYhAW1NIApp3IEf0")
   }
 }
